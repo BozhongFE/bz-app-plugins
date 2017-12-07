@@ -1,0 +1,219 @@
+<template>
+  <div id="app">
+    <pre class="code-box">
+      <code>
+
+      // 全部引入
+
+      import AppPlugins from './plugins/bz-app-plugins.js';
+
+      for (const plugin in AppPlugins) {
+        if (AppPlugins[plugin]) Vue.use(AppPlugins[plugin]);
+      }
+
+      // 按需引入
+
+      import { AppAlert } from 'vue-app-plugins';
+      Vue.use(AppAlert);
+      </code>
+    </pre>
+    <pre class="code-box">
+      <code>
+      {{toastCode}}
+      </code>
+    </pre>
+    <div class="btn-box">
+      <a class="btn-box__a" href="javascript:" @click="show('toast')">toast</a>
+      <code class="btn-box__code" codeFor="toast">
+      // toast(toastText, timeout, type, callback) 后三个可省, 不能逆序
+
+      this.$app.toast('222', 1500, 'middle', () => {
+        console.log('toast');
+      });
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('toastBottom')">toast - 位置</a>
+      <code class="btn-box__code" codeFor="toastBottom">
+      // 可传 top/middle/bottom
+
+      this.$app.toast('toast', 'bottom');
+      </code>
+    </div>
+    <pre class="code-box">
+      <code>
+      {{alertCode}}
+      </code>
+    </pre>
+    <div class="btn-box">
+      <a class="btn-box__a" href="javascript:" @click="show('alert')">alert</a>
+      <code class="btn-box__code" codeFor="alert">
+      // alert(content, title, callback) 全非必填, 不能逆序
+      // 需要改按钮文案传对象
+
+      this.$app.alert('alert');
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('alertObject')">alert - 传对象</a>
+      <code class="btn-box__code" codeFor="alertObject">
+      // 直接传入对象
+      this.$app.alert({
+        title: 'title', // 标题
+        content: 'content', // 文本
+        btnText: 'btnText', // 按钮文案
+        maskAbled: false, // 点击遮罩是否可隐藏, 默认true
+        needCloseBtn: false, // 是否显示关闭按钮, 默认true
+        callback() { // 回调
+          console.log('callback');
+        },
+      });
+      </code>
+    </div>
+    <pre class="code-box">
+      <code>
+      {{confirmCode}}
+      </code>
+    </pre>
+    <div class="btn-box">
+      <a class="btn-box__a" href="javascript:" @click="show('confirm')">confirm</a>
+      <code class="btn-box__code" codeFor="confirm">
+      // confirm(content, title, confirmFn) 全非必填, 不能逆序
+      // 需要改更多内容传对象
+
+      this.$app.confirm('confirm');
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('confirmObject')">confirm - 传对象</a>
+      <code class="btn-box__code" codeFor="confirmObject">
+      // 直接传入对象，所有属性非必填
+
+      this.$app.confirm({
+        title: 'title',
+        content: 'content',
+        btnTextCancle: 'btnTextCancle',
+        btnTextSubmit: 'btnTextSubmit',
+        close: true, // 点击确认时是否隐藏弹窗, 默认false
+        maskAbled: true, // 点击遮罩是否可隐藏, 默认false
+        needCloseBtn: true, // 是否显示关闭按钮, 默认false
+        onCancel() {
+          console.log('onCancel');
+        },
+        onShow() {
+          console.log('onShow');
+        },
+        onHide() {
+          console.log('onHide');
+        },
+        onConfirm() {
+          console.log('onConfirm');
+        },
+      });
+      </code>
+    </div>
+    <pre class="code-box">
+      <code>
+      // 后期待补充
+      // 样式主题 - px/rem/换肤
+      // 组件形式导出
+      </code>
+    </pre>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'app',
+  data() {
+    return {
+      useCode: '',
+      toastCode: null,
+      alertCode: null,
+      confirmCode: null,
+    };
+  },
+  components: {
+  },
+  methods: {
+    show(key) {
+      let codeKey;
+      if (/confirm/.test(key)) {
+        codeKey = 'confirmCode';
+      }
+      if (/alert/.test(key)) {
+        codeKey = 'alertCode';
+      }
+      if (/toast/.test(key)) {
+        codeKey = 'toastCode';
+      }
+      if (!codeKey) return false;
+      const code = this.getCode(key);
+      this[codeKey] = code;
+      return eval(code);
+    },
+    getCode(key) {
+      const tagsToReplace = {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+      };
+      const replaceTag = tag => tagsToReplace[tag] || tag;
+      const safeTagsReplace = str => str.replace(/(&amp;|&lt;|&gt;)/g, replaceTag);
+
+      return safeTagsReplace(document.querySelector(`code[codeFor=${key}]`).innerHTML);
+    },
+  },
+  mounted() {
+    const self = this;
+    self.confirmCode = self.getCode('confirm');
+    self.alertCode = self.getCode('alert');
+    self.toastCode = self.getCode('toast');
+  },
+};
+</script>
+
+<style lang="less">
+  body {
+    max-width: 750px;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 14px;
+  }
+
+  pre {
+    overflow-x: auto;
+    word-wrap: normal;
+    margin-left: 0;
+    box-sizing: border-box;
+  }
+
+  pre::-webkit-scrollbar {
+    display: none;
+  }
+
+  pre, code {
+    font-family: 'Source Code Pro', Consolas, 'Liberation Mono', Courier, 'PT Mono', "PingFang SC", "Microsoft YaHei", monospace, serif;
+  }
+  .code-box {
+    margin: 0 5px;
+    margin-bottom: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 13px;
+    box-sizing: border-box;
+  }
+  .btn-box {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .btn-box__a {
+    flex: 1;
+    background-color: #ff8bac;
+    width: 96%;
+    height: 40px;
+    line-height: 38px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+  }
+  .btn-box__code {
+    display: none;
+  }
+</style>

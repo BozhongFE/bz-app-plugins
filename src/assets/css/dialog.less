@@ -1,0 +1,83 @@
+@import './base/specs.less';
+
+.app-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+.app-dialog__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: @colorMask;
+}
+.app-dialog__box {
+  position: relative;
+  width: @dialogWidth;
+  background-color: #fff;
+  border-radius: @dialogBorderRadius;
+  text-align: center;
+  // overflow: hidden;
+}
+.app-dialog__hd {
+  padding: @dialogSpacingBdPadding;
+  margin-bottom: @dialogSpacinghdMarginBottom;
+  font-size: @dialogFontSizeTitle;
+  line-height: @dialogFontLineHeightTitle;
+  color: @dialogColorTitle
+}
+.app-dialog__title {}
+.app-dialog__bd {
+  padding: @dialogSpacingBdPadding @dialogSpacingBdPaddingX;
+  font-size: @dialogFontSizeText;
+  line-height: @dialogFontLineHeightText;
+  color: @dialogColorText;
+}
+.app-dialog__hd + .app-dialog__bd {
+  padding-top: 0;
+}
+.app-dialog__content {}
+.app-dialog__ft {
+  display: flex;
+  font-size: @dialogFontSizeBtn;
+  border-radius:0 0 @dialogBorderRadius @dialogBorderRadius;
+  overflow: hidden;
+}
+.app-dialog__btn {
+  flex: 1;
+  height: @dialogFontLineHeightBtn;
+  line-height: @dialogFontLineHeightBtn;
+  border-top: 1px solid @dialogColorBorderDefault;
+  // font-weight: bold;
+  &:active {
+    background-color: @dialogColorBorderDefault;
+  }
+  & + .app-dialog__btn {
+    border-left: 1px solid @dialogColorBorderDefault;
+  }
+}
+.app-dialog__btn--primary {
+  color: @dialogColorBtnPrimary;
+}
+.app-dialog__btn--default {
+  color: @dialogColorBtnDefault;
+}
+.app-dialog__close {
+  position: absolute;
+  top: @dialogPositionCloseTop;
+  right: @dialogPositionCloseRight;
+  width: @dialogWidthClose;
+  height: @dialogHeightClose;
+  background-image: @dialogIconClose;
+  background-size: 100% 100%;
+}
