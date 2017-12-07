@@ -2,19 +2,23 @@
   <div id="app">
     <pre class="code-box">
       <code>
+      // requirejs引入
+      require(['mod/bz-app-plugins/1.0.0/bz-app-plugins'], function (AppPlugins) {
+        // 手动过滤一层
+        plugins = AppPlugins.default;
 
-      // 全部引入
+        for (const plugin in plugins) {
+          if (plugins[plugin]) Vue.use(plugins[plugin]);
+        }
+      }
 
-      import AppPlugins from './plugins/bz-app-plugins.js';
+      // Vue引入
+      // mod需自行指定路径
+      import AppPlugins from 'mod/bz-app-plugins/1.0.0/bz-app-plugins.js';
 
       for (const plugin in AppPlugins) {
         if (AppPlugins[plugin]) Vue.use(AppPlugins[plugin]);
       }
-
-      // 按需引入
-
-      import { AppAlert } from 'vue-app-plugins';
-      Vue.use(AppAlert);
       </code>
     </pre>
     <pre class="code-box">
