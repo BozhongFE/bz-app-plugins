@@ -41,6 +41,12 @@
 
       this.$app.toast('toast', 'bottom');
       </code>
+      <a class="btn-box__a" href="javascript:" @click="show('toastHide')">toastHide - 关闭</a>
+      <code class="btn-box__code" codeFor="toastHide">
+      // 手动关闭
+
+      this.$app.toastHide();
+      </code>
     </div>
     <pre class="code-box">
       <code>
@@ -68,6 +74,19 @@
           console.log('callback');
         },
       });
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('alertHide')">alertHide - 关闭</a>
+      <code class="btn-box__code" codeFor="alertHide">
+      var self = this;
+      self.$app.alert('alert');
+
+      setTimeout(function(){
+
+        // 手动关闭
+
+        self.$app.alertHide();
+
+      }, 1000)
       </code>
     </div>
     <pre class="code-box">
@@ -108,6 +127,19 @@
           console.log('onConfirm');
         },
       });
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('confirmHide')">confirmHide - 关闭</a>
+      <code class="btn-box__code" codeFor="confirmHide">
+      var self = this;
+      self.$app.confirm('alert');
+
+      setTimeout(function(){
+
+        // 手动关闭
+
+        self.$app.confirmHide();
+
+      }, 1000)
       </code>
     </div>
     <pre class="code-box">

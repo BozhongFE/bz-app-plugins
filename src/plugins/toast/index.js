@@ -11,6 +11,8 @@ export default ToastPlugin.install = (Vue) => {
     });
     document.body.appendChild($vm.$el);
   }
+  // 用于清除延时事件
+  let toastTimeOut = null;
   const toast = (toastText = '', timeOut = 1500, type = 'middle', fn = null) => {
     $vm.toastText = toastText;
 
@@ -35,18 +37,27 @@ export default ToastPlugin.install = (Vue) => {
 
     $vm.currentValue = true;
     if (timeout) {
-      setTimeout(() => {
+      toastTimeOut = setTimeout(() => {
         $vm.currentValue = false;
         if (callback) callback($vm);
       }, timeout);
     }
   };
+
+  // 手动关闭
+  const toastHide = () => {
+    window.clearTimeout(toastTimeOut);
+    $vm.currentValue = false;
+  };
+
   if (!Vue.$app) {
     Vue.$app = {
       toast,
+      toastHide,
     };
   } else {
     Vue.$app.toast = toast;
+    Vue.$app.toastHide = toastHide;
   }
 
   Vue.mixin({

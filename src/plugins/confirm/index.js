@@ -83,13 +83,19 @@ export default ConfirmPlugin.install = (Vue) => {
     $vm.currentValue = true;
   };
 
+  // 手动关闭
+  const confirmHide = () => {
+    $vm.currentValue = false;
+  };
 
   if (!Vue.$app) {
     Vue.$app = {
       confirm,
+      confirmHide,
     };
   } else {
     Vue.$app.confirm = confirm;
+    Vue.$app.confirmHide = confirmHide;
   }
 
   Vue.mixin({

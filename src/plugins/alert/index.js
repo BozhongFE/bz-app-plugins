@@ -61,12 +61,19 @@ export default AlertPlugin.install = (Vue) => {
     $vm.currentValue = true;
   };
 
+  // 手动关闭
+  const alertHide = () => {
+    $vm.currentValue = false;
+  };
+
   if (!Vue.$app) {
     Vue.$app = {
       alert,
+      alertHide,
     };
   } else {
     Vue.$app.alert = alert;
+    Vue.$app.alertHide = alertHide;
   }
 
   Vue.mixin({
