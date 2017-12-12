@@ -31,7 +31,7 @@
       <code class="btn-box__code" codeFor="toast">
       // toast(toastText, timeout, type, callback) 后三个可省, 不能逆序
 
-      this.$app.toast('222', 1500, 'middle', () => {
+      this.$app.toast('toast(toastText, timeout, type, callback) 后三个可省, 不能逆序', 1500, 'middle', () => {
         console.log('toast');
       });
       </code>
@@ -56,7 +56,7 @@
     <div class="btn-box">
       <a class="btn-box__a" href="javascript:" @click="show('alert')">alert</a>
       <code class="btn-box__code" codeFor="alert">
-      // alert(content, title, callback) 全非必填, 不能逆序
+      // alert(content, title, onConfirm) 全非必填, 不能逆序
       // 需要改按钮文案传对象
 
       this.$app.alert('alert');
@@ -68,10 +68,17 @@
         title: 'title', // 标题
         content: 'content', // 文本
         btnText: 'btnText', // 按钮文案
+        close: false, // 点击确认时是否隐藏弹窗, 默认true
         maskAbled: false, // 点击遮罩是否可隐藏, 默认true
         needCloseBtn: false, // 是否显示关闭按钮, 默认true
-        callback() { // 回调
-          console.log('callback');
+        onShow() {
+          console.log('onShow');
+        },
+        onHide() {
+          console.log('onHide');
+        },
+        onConfirm() {
+          console.log('onConfirm');
         },
       });
       </code>
@@ -111,7 +118,7 @@
         content: 'content',
         btnTextCancle: 'btnTextCancle',
         btnTextSubmit: 'btnTextSubmit',
-        close: true, // 点击确认时是否隐藏弹窗, 默认false
+        close: false, // 点击确认时是否隐藏弹窗, 默认true
         maskAbled: true, // 点击遮罩是否可隐藏, 默认false
         needCloseBtn: true, // 是否显示关闭按钮, 默认false
         onCancel() {

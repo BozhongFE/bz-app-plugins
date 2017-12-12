@@ -12,36 +12,40 @@ export default AlertPlugin.install = (Vue) => {
     document.body.appendChild($vm.$el);
   }
   // 可直接传入对象
-  const alert = (content = '', title = '提示', fn = null) => {
+  const alert = (content, title, fn) => {
 
-    let callback = null;
+    // 还原数据
+    $vm.content = '';
+    $vm.title = '提示';
+    $vm.close = true;
+    $vm.maskAbled = true;
+    $vm.needCloseBtn = true;
+    $vm.btnText = '确认';
+    let onConfirm = null;
+    let onShow = null;
+    let onHide = null;
 
     if (Object.prototype.toString.call(content) === '[object Object]') {
       const obj = content;
-      $vm.content = obj.content;
-      $vm.title = obj.title;
-      $vm.maskAbled = obj.hasOwnProperty('maskAbled') ? obj.maskAbled : true;
-      $vm.needCloseBtn = obj.hasOwnProperty('needCloseBtn') ? obj.needCloseBtn : true;
+      if (obj.content) $vm.content = obj.content;
+      if (obj.title) $vm.title = obj.title;
+      if (obj.hasOwnProperty('close')) $vm.close = obj.close;
+      if (obj.hasOwnProperty('maskAbled')) $vm.maskAbled = obj.maskAbled;
+      if (obj.hasOwnProperty('needCloseBtn')) $vm.needCloseBtn = obj.needCloseBtn;
       if (obj.btnText) $vm.btnText = obj.btnText;
-      callback = obj.callback;
+      onConfirm = obj.onConfirm;
+      onShow = obj.onShow;
+      onHide = obj.onHide;
     } else {
-      // 还原被改过的
-      $vm.content = '';
-      $vm.title = '提示';
-      $vm.maskAbled = true;
-      $vm.needCloseBtn = true;
-      $vm.btnText = '确认';
-      callback = null;
-
       if (Object.prototype.toString.call(title) === '[object Function]') {
         $vm.title = '提示';
-        callback = title;
+        onConfirm = title;
       } else {
         $vm.title = title;
-        callback = fn;
+        onConfirm = fn;
       }
       if (Object.prototype.toString.call(content) === '[object Function]') {
-        callback = content;
+        onConfirm = content;
       } else {
         $vm.content = content;
       }
@@ -49,14 +53,18 @@ export default AlertPlugin.install = (Vue) => {
 
     if ($vm.watcher) $vm.watcher();
     $vm.watcher = $vm.$watch('currentValue', (val) => {
-      // if (val && options.onShow) {
-      //   options.onShow($vm);
-      // } else
-      if (!val && callback) {
-        callback($vm);
+      if (val && onShow) {
+        onShow($vm);
+      } else if (!val && onHide) {
+        onHide($vm);
         if ($vm.watcher) $vm.watcher();
         $vm.watcher = null;
       }
+    });
+    $vm.$off('on-confirm');
+
+    $vm.$on('on-confirm', () => {
+      if (onConfirm) onConfirm();
     });
     $vm.currentValue = true;
   };

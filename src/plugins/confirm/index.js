@@ -12,40 +12,37 @@ export default ConfirmPlugin.install = (Vue) => {
     document.body.appendChild($vm.$el);
   }
   // 可直接传入对象
-  const confirm = (content = '', title = '提示', confirmFn = null) => {
+  const confirm = (content, title, confirmFn) => {
 
-    let onShow = null;
-    let onHide = null;
+    // 初始化数据
+    $vm.title = '提示';
+    $vm.content = '';
+    $vm.btnTextCancle = '取消';
+    $vm.btnTextSubmit = '确认';
+    $vm.close = true;
+    $vm.maskAbled = false;
+    $vm.needCloseBtn = false;
     let onCancel = null;
     let onConfirm = null;
+    let onShow = null;
+    let onHide = null;
 
 
     if (Object.prototype.toString.call(content) === '[object Object]') {
       const obj = content;
-      $vm.title = obj.title || '提示';
-      $vm.content = obj.content;
-      $vm.btnTextCancle = obj.btnTextCancle ? obj.btnTextCancle : '取消';
-      $vm.btnTextSubmit = obj.btnTextSubmit ? obj.btnTextSubmit : '确认';
-      $vm.close = obj.hasOwnProperty('close') ? obj.close : false;
-      $vm.maskAbled = obj.hasOwnProperty('maskAbled') ? obj.maskAbled : false;
-      $vm.needCloseBtn = obj.hasOwnProperty('needCloseBtn') ? obj.needCloseBtn : false;
+
+      if (obj.content) $vm.content = obj.content;
+      if (obj.title) $vm.title = obj.title;
+      if (obj.hasOwnProperty('close')) $vm.close = obj.close;
+      if (obj.hasOwnProperty('maskAbled')) $vm.maskAbled = obj.maskAbled;
+      if (obj.hasOwnProperty('needCloseBtn')) $vm.needCloseBtn = obj.needCloseBtn;
+      if (obj.btnTextCancle) $vm.btnTextCancle = obj.btnTextCancle;
+      if (obj.btnTextSubmit) $vm.btnTextSubmit = obj.btnTextSubmit;
       onCancel = obj.onCancel;
       onConfirm = obj.onConfirm;
       onShow = obj.onShow;
       onHide = obj.onHide;
     } else {
-      // 还原被改过的
-      $vm.title = '提示';
-      $vm.content = '';
-      $vm.btnTextCancle = '取消';
-      $vm.btnTextSubmit = '确认';
-      $vm.close = false;
-      $vm.maskAbled = false;
-      $vm.needCloseBtn = false;
-      onCancel = null;
-      onConfirm = null;
-      onShow = null;
-      onHide = null;
       if (Object.prototype.toString.call(title) === '[object Function]') {
         $vm.title = '提示';
         onConfirm = title;

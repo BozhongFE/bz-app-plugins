@@ -80,7 +80,7 @@
     methods: {
       onClick(status) {
         if (status) {
-          this.currentValue = this.close;
+          this.currentValue = !this.close;
           this.$emit('on-confirm');
         } else {
           this.currentValue = false;

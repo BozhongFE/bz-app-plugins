@@ -58,6 +58,10 @@
         type: String,
         default: '确认',
       },
+      close: {
+        type: Boolean,
+        default: true,
+      },
     },
     data() {
       return {
@@ -66,7 +70,7 @@
     },
     methods: {
       onClick() {
-        this.currentValue = false;
+        this.currentValue = !this.close;
         this.$emit('on-confirm');
       },
       onHide() {
