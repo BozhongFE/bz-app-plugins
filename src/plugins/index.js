@@ -1,6 +1,7 @@
 import AppAlert from './alert/index.js';
 import AppConfirm from './confirm/index.js';
 import AppToast from './toast/index.js';
+import AppLoading from './loading/index.js';
 
 (function(scope){
   // 下面750对应设计稿的宽度
@@ -25,4 +26,5 @@ export default {
   AppAlert,
   AppConfirm,
   AppToast,
-}
+  AppLoading,
+};

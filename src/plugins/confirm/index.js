@@ -1,4 +1,4 @@
-import ConfirmComponent from '../../components/confirm/index.vue';
+import ConfirmComponent from 'src/components/confirm/index.vue';
 
 let $vm = null;
 const ConfirmPlugin = {};

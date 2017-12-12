@@ -23,6 +23,38 @@
     </pre>
     <pre class="code-box">
       <code>
+      {{loadingCode}}
+      </code>
+    </pre>
+    <div class="btn-box">
+      <a class="btn-box__a" href="javascript:" @click="show('loading')">loading</a>
+      <code class="btn-box__code" codeFor="loading">
+      // loading(content = '', timeout, callback) 全非必填, 不能逆序, 不填时间不隐藏
+
+      this.$app.loading();
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('loadingText')">loading - 文字</a>
+      <code class="btn-box__code" codeFor="loadingText">
+      // 提示文案
+      this.$app.loading('loading', 1500, () => {
+        console.log('loading');
+      });
+      </code>
+      <a class="btn-box__a" href="javascript:" @click="show('loadingHide')">loadingHide - 关闭</a>
+      <code class="btn-box__code" codeFor="loadingHide">
+      var self = this;
+      self.$app.loading('loading', 40000);
+
+      setTimeout(function(){
+
+        // 手动关闭
+        self.$app.loadingHide();
+
+      }, 1000)
+      </code>
+    </div>
+    <pre class="code-box">
+      <code>
       {{toastCode}}
       </code>
     </pre>
@@ -169,6 +201,7 @@ export default {
       toastCode: null,
       alertCode: null,
       confirmCode: null,
+      loadingCode: null,
     };
   },
   components: {
@@ -184,6 +217,9 @@ export default {
       }
       if (/toast/.test(key)) {
         codeKey = 'toastCode';
+      }
+      if (/loading/.test(key)) {
+        codeKey = 'loadingCode';
       }
       if (!codeKey) return false;
       const code = this.getCode(key);
@@ -207,6 +243,7 @@ export default {
     self.confirmCode = self.getCode('confirm');
     self.alertCode = self.getCode('alert');
     self.toastCode = self.getCode('toast');
+    self.loadingCode = self.getCode('loading');
   },
 };
 </script>

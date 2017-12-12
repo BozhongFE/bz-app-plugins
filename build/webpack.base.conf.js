@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
+        loader: 'url-loader?limit=8192',
         options: {
           name: '[name].[ext]?[hash]'
         }
@@ -39,6 +39,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
+      'src': path.resolve(__dirname, '../src')
     },
     extensions: ['*', '.js', '.vue', '.json']
   },

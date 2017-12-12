@@ -1,4 +1,4 @@
-import AlertComponent from '../../components/alert/index.vue';
+import AlertComponent from 'src/components/alert/index.vue';
 
 let $vm = null;
 const AlertPlugin = {};

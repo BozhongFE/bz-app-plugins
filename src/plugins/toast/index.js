@@ -1,4 +1,4 @@
-import ToastComponent from '../../components/toast/index.vue';
+import ToastComponent from 'src/components/toast/index.vue';
 
 let $vm = null;
 const ToastPlugin = {};

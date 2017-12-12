@@ -54,5 +54,5 @@
 
 </script>
 <style lang="less" scoped>
-  @import '../../assets/css/toast.less';
+  @import '~src/assets/css/toast.less';
 </style>
