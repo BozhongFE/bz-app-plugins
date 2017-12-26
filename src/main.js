@@ -3,8 +3,12 @@ import App from './App.vue';
 
 import AppPlugins from './plugins/index.js';
 
-for (const plugin in AppPlugins) {
-  if (AppPlugins[plugin]) Vue.use(AppPlugins[plugin]);
+AppPlugins.initRem();
+
+const plugins = AppPlugins.plugins;
+
+for (const plugin in plugins) {
+  if (plugins[plugin]) Vue.use(plugins[plugin]);
 }
 new Vue({
   el: '#app',

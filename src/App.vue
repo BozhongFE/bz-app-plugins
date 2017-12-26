@@ -4,8 +4,13 @@
       <code>
       // requirejs引入
       require(['mod/bz-app-plugins/1.0.0/bz-app-plugins'], function (AppPlugins) {
-        // 手动过滤一层
-        plugins = AppPlugins.default;
+
+        // require 引入需过一层default
+
+        // 若页面没有对rem进行处理, width为设计稿尺寸，默认750
+        AppPlugins.default.initRem();
+
+        const plugins = AppPlugins.default.plugins;
 
         for (const plugin in plugins) {
           if (plugins[plugin]) Vue.use(plugins[plugin]);
@@ -15,6 +20,11 @@
       // Vue引入
       // mod需自行指定路径
       import AppPlugins from 'mod/bz-app-plugins/1.0.0/bz-app-plugins.js';
+
+      // 若页面没有对rem进行处理, width为设计稿尺寸，默认750
+      AppPlugins.initRem(width);
+
+      const plugins = AppPlugins.plugins;
 
       for (const plugin in AppPlugins) {
         if (AppPlugins[plugin]) Vue.use(AppPlugins[plugin]);

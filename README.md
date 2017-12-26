@@ -1,18 +1,7 @@
-# vue-app-plugin
 
-> A Vue.js project
+## 开发版本日志
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+|#|版本号|版本内容|
+|---|---|---|
+|#|1.0.0| vue插件-toast/loading/alert/confirm
+|#|1.1.0| rem初始化代码由外部控制传参执行
