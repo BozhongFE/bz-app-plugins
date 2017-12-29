@@ -20,6 +20,11 @@ module.exports = {
           loaders: {
             less: 'style-loader!css-loader?-autoprefixer!less-loader'
           },
+          postcss: [autoprefixer({
+            // browsers: ['> 3%', 'last 3 versions', 'ie >= 9', 'iOS >= 7', 'Android >= 4.0'],
+            browsers: ['iOS >= 8', 'Android >= 4.1'],
+          })],
+          // other vue-loader options go here
         }
       },
       {
