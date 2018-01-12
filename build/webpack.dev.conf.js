@@ -2,7 +2,6 @@ var merge = require('webpack-merge')
 var webpack = require('webpack')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
 const baseWebpackConfig = require('./webpack.base.conf')
 
 // // add hot-reload related code to entry chunks
@@ -24,6 +23,11 @@ module.exports = merge(baseWebpackConfig, {
   // }
   plugins: [
     new FriendlyErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"dev"',
+      },
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',

@@ -1,7 +1,7 @@
 <template>
   <div class="app-loading" v-show="currentValue"
     @touchmove="onTouchMove">
-    <div class="app-loading__mask"></div>
+    <!-- <div class="app-loading__mask"></div> -->
     <div class="app-loading__box">
       <em class="app-loading__icon"></em>
       <span class="app-loading__content" v-if="content" v-html="content"></span>
@@ -49,5 +49,5 @@
   };
 </script>
 <style lang="less">
-  @import '~src/assets/css/loading.less';
+  // @import '~src/assets/css/loading.less';
 </style>

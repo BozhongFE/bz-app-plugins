@@ -1,10 +1,16 @@
-@import './base/specs.less';
+// @import './base/specs.less';
 
 .app-toast {
   position: fixed;
-  left: 50%;
-  transform: translate(-50%, 0);
+  left: 0;
+  // transform: translate(-50%, 0);
+  width: 100%;
+  text-align: center;
+  z-index: 250;
+}
+.app-toast__main {
   display: inline-block;
+  max-width: @toastWidthMax;
   padding: @toastSpacingPaddingY @toastSpacingPadding;
   font-size: @toastFontSize;
   background-color: @toastColorBtnDefaultBg;
@@ -12,14 +18,14 @@
   border-radius: @toastBorderRadius;
   line-height: @toastFontLineHeight;
   word-break: break-all;
-  z-index: 250;
+  box-sizing: border-box;
 }
 .app-toast--bottom {
   bottom: @toastSpacingMargin;
 }
 .app-toast--middle {
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 }
 .app-toast--top {
   top: @toastSpacingMargin;

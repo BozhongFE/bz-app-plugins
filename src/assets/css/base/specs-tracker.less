@@ -1,10 +1,5 @@
 // 要考虑主题换肤问题对这个文件下手
 
-// 单位-用于rem/px
-// @unix: 1/2px;
- @unix: 1/40rem;
-
-
 // 遮罩层
 @colorMask: rgba(0, 0, 0, 0.5);
 
@@ -13,9 +8,9 @@
 @fontSizeText: 28*@unix;
 @fontSizeBtn: 32*@unix;
 
-
-
 // toast
+// 尺寸
+@toastWidthMax: 560*@unix;
 // 间距边距
 @toastSpacingPadding: 34*@unix;
 @toastSpacingPaddingY: 19*@unix;
@@ -49,6 +44,7 @@
 @dialogColorBtnDefault: @dialogColorText;
 @dialogColorBtnPrimary: #ffba2c;
 @dialogColorBorderDefault: #dcdcdc;
+@dialogFontWeightBtnPrimary: normal;
 // 字体
 @dialogFontSizeTitle: @fontSizeTitle;
 @dialogFontSizeText: @fontSizeBtn;
@@ -63,13 +59,19 @@
 
 // loading
 // 尺寸
-@loadingWidth: 52*@unix;
-@loadingHeight: @loadingWidth;
+@loadingWidth: 100%;
+@loadingHeight: 100%;
+@loadingIconWidth: 52*@unix;
+@loadingIconHeight: @loadingIconWidth;
 // 间距边距
+@loadingSpacingPaddingX: 0;
+@loadingSpacingPaddingY: 0;
 @loadingSpacingTextMarginTop: 20*@unix;
 // 字体
 @loadingFontSizeText: @fontSizeText;
 // 颜色
 @loadingColorText: #fff;
+// 边框
+@loadingBorderRadius: 0;
 // 图标
 @loadingIcon: url('~src/assets/images/loading.gif');

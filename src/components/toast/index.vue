@@ -53,6 +53,6 @@
   };
 
 </script>
-<style lang="less" scoped>
-  @import '~src/assets/css/toast.less';
+<style lang="less">
+  // @import '~src/assets/css/toast.less';
 </style>

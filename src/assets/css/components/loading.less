@@ -1,4 +1,4 @@
-@import './base/specs.less';
+// @import './base/specs.less';
 
 .app-loading {
   position: fixed;
@@ -27,11 +27,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: @loadingWidth;
+  height: @loadingHeight;
+  padding: @loadingSpacingPaddingY @loadingSpacingPaddingX;
+  background-color: @colorMask;
+  border-radius: @loadingBorderRadius;
 }
 .app-loading__icon {
   display: inline-block;
-  width: @loadingWidth;
-  height: @loadingHeight;
+  width: @loadingIconWidth;
+  height: @loadingIconHeight;
   background-image: @loadingIcon;
   background-size: 100% 100%;
 }

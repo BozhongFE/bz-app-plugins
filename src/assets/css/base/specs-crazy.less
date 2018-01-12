@@ -1,0 +1,77 @@
+// 要考虑主题换肤问题对这个文件下手
+
+// 遮罩层
+@colorMask: rgba(0, 0, 0, 0.5);
+
+// 字体大小
+// @fontSizeTitle: 20*@unix;
+// @fontSizeText: 28*@unix;
+// @fontSizeBtn: 32*@unix;
+
+// toast
+// 尺寸
+@toastWidthMax: 280*@unix;
+// 间距边距
+@toastSpacingPadding: 16*@unix;
+@toastSpacingPaddingY: 10*@unix;
+@toastSpacingMargin: 30*@unix;
+// 字体
+@toastFontSize: 14*@unix;
+@toastFontLineHeight: 20*@unix;
+// 颜色
+@toastColor: #fff;
+@toastColorBtnDefaultBg: @colorMask;
+// 边框
+@toastBorderRadius: 20*@unix;
+
+
+// dialog
+// 尺寸
+@dialogWidth: 280*@unix;
+@dialogWidthClose: 18*@unix;
+@dialogHeightClose: @dialogWidthClose;
+// 定位
+@dialogPositionCloseTop: -28*@unix;
+@dialogPositionCloseRight: 0;
+// 间距边距
+@dialogSpacinghdPadding: 16*@unix;
+@dialogSpacinghdMarginBottom: -4*@unix;
+@dialogSpacingBdPadding: @dialogSpacinghdPadding;
+@dialogSpacingBdPaddingX: 16*@unix;
+// 颜色
+@dialogColorTitle: #282828;
+@dialogColorText: #444444;
+@dialogColorBtnDefault: #666666;
+@dialogColorBtnPrimary: #FF668C;
+@dialogColorBorderDefault: #dcdcdc;
+// 字体
+@dialogFontSizeTitle: 20*@unix;
+@dialogFontSizeText: 16*@unix;
+@dialogFontSizeBtn: 16*@unix;
+@dialogFontLineHeightTitle: 30*@unix;
+@dialogFontLineHeightText: 24*@unix;
+@dialogFontLineHeightBtn: 48*@unix;
+@dialogFontWeightBtnPrimary: bold;
+// 边框
+@dialogBorderRadius: 13*@unix;
+// 图标
+@dialogIconClose: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo2MDIzODM3NC04ZjNmLWI2NGUtYTQwMS0zMjIzZTkyNmI0NWYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MkJFRjk3MkFEQUZCMTFFN0JFOUNFQjlBNzQyQUE5OEUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MkJFRjk3MjlEQUZCMTFFN0JFOUNFQjlBNzQyQUE5OEUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Zjc0NTU4ZDYtODU4OC0yZDRjLTk4ODgtNjA1YWZkZWMwODkwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjYwMjM4Mzc0LThmM2YtYjY0ZS1hNDAxLTMyMjNlOTI2YjQ1ZiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqHuVd4AAAFZSURBVHjavJhNbsJADIVdEFImx2Ldnqp0BT0Dm3KCdlmmlyl/F4AVTW3JbCLSztjPsfQkJDKeD4/tmKGu62asBWvHOrJWrIZFwWp0rwPrm/UsLKQf+rZltYEwSffo24KUrhsRaghGbDchoindtznrndUSzhLrQ33fs6kAbf5wgIT6D0bs7ZZcQyFEHV8q3KOpXdAaYT5LfZsXRsD0gdBQJl8wRygfcIfeH4QOuTu6yDyA5B+yUiDFgCxfSLtANzh374rouq7uTkGvAvOrZkJx9mBaFXxkOfLIrEmdI5LaW/YZWfYlMLnwGXdjTBUbJQQUCsazBjZ+ZMf4kWvGD0TozT4iYFy+omDMPiNhTL5vfxSjYGqhkjy8DIapgXolvROKhimFOsn48TMwCHyxHlln4EhyYT2xtgPfXwVoPRJMCdSa9ErvhbWXkMk5amjHuNJbasrslWH2K8AAfOfo4xcTHVIAAAAASUVORK5CYII=');
+
+// loading
+// 尺寸
+@loadingWidth: auto;
+@loadingHeight: auto;
+@loadingIconWidth: 50*@unix;
+@loadingIconHeight: 74*@unix;
+// 间距边距
+@loadingSpacingPaddingX: 36*@unix;
+@loadingSpacingPaddingY: 16*@unix;
+@loadingSpacingTextMarginTop: 12*@unix;
+// 字体
+@loadingFontSizeText: 14@unix;
+// 颜色
+@loadingColorText: #fff;
+// 边框
+@loadingBorderRadius: 13*@unix;
+// 图标
+@loadingIcon: url('~src/assets/images/xiaobo.gif');
