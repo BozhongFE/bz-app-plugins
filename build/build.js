@@ -1,11 +1,12 @@
 process.env.NODE_ENV = 'production'
 
-var path = require('path')
-var shell = require('shelljs')
-var webpack = require('webpack')
-var webpackConfig = require('./webpack.prod.conf')
+const path = require('path')
+const shell = require('shelljs')
+const webpack = require('webpack')
 
-var assetsPath = path.join(__dirname, '../dist')
+const webpackConfig = require('./webpack.prod.conf')
+
+const assetsPath = path.join(__dirname, '../dist')
 shell.rm('-rf', assetsPath)
 
 const removeUseLesFile = () => {
