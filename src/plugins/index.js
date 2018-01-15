@@ -88,12 +88,7 @@ class AppPlugins {
         const modVersion = env.PACKAGE_VERSION;
         const styleName = options.style || 'trackerrem';
 
-        const styleArr = {
-          trackerrem: 'tracker-rem',
-          tracker: 'tracker-px',
-          crazy: 'crazy-px',
-        }
-        cssLink = `${domain}/moe/${modName}/${modVersion}/${styleArr[styleName]}.css`;
+        cssLink = `${domain}/moe/${modName}/${modVersion}/${styleName}.css`;
       }
       const link = document.createElement('link');
       link.rel = 'stylesheet';
