@@ -3,8 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const name = process.env.npm_package_name;
