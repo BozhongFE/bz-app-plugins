@@ -49,5 +49,4 @@
   };
 </script>
 <style lang="less">
-  // @import '~src/assets/css/loading.less';
 </style>

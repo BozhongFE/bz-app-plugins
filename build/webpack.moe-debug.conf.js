@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const name = process.env.npm_package_name;
@@ -15,11 +17,14 @@ modulePath = path.join(modulePath, version);
 const webpackConfig = merge(baseWebpackConfig, {
   entry: {
     'bz-app-plugins': './index.js',
+    tracker: './src/assets/css/tracker-px.less',
+    trackerrem: './src/assets/css/tracker-rem.less',
+    crazy: './src/assets/css/crazy-px.less',
   },
   output: {
     path: path.resolve(modulePath),
     // filename: `${name}-debug.js`,
-    // filename: `[name]-debug.js`,
+    filename: `[name]-debug.js`,
     libraryTarget: 'umd',
     // library: 'bz-app-plugins',
     libraryExport: 'default',
@@ -33,7 +38,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       'process.env': {
         NODE_ENV: '"production"',
         PACKAGE_NAME: '\'' + process.env.npm_package_name + '\'',
-        PACKAGE_VERSION: '\'' + String(process.env.npm_package_version) + '\'',
+        PACKAGE_VERSION: '\'' + process.env.npm_package_version + '\'',
       },
     }),
     new webpack.LoaderOptionsPlugin({

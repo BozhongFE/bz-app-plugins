@@ -14,6 +14,9 @@ const baseWebpackConfig = require('./webpack.base.conf')
 // })
 
 module.exports = merge(baseWebpackConfig, {
+  entry: {
+    index: './src/main.js',
+  },
   // plugin: [
   //   // new webpack.NoEmitOnErrorsPlugin(),
   //   // new webpack.HotModuleReplacementPlugin()

@@ -1,16 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
 var autoprefixer = require('autoprefixer')
+
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 module.exports = {
-  entry: {
-    'bz-app-plugins': './src/main.js',
-    tracker: './src/assets/css/tracker-px.less',
-    // trackerrem: './src/assets/css/tracker-rem.less',
-    // crazy: './src/assets/css/crazy-px.less',
-  },
+  // entry: {
+  //   // 'bz-app-plugins': './src/main.js',
+  // },
   // output: {
   //   path: path.resolve(__dirname, '../dist'),
   //   filename: process.env.NODE_ENV === 'production' ? '[name].js?[chunkhash]' : '[name].js',
@@ -25,6 +22,10 @@ module.exports = {
           loaders: {
             less: 'style-loader!css-loader?-autoprefixer!less-loader',
           },
+          // postcss: [autoprefixer({
+          //   // browsers: ['> 3%', 'last 3 versions', 'ie >= 9', 'iOS >= 7', 'Android >= 4.0'],
+          //   browsers: ['iOS >= 8', 'Android >= 4.1'],
+          // })],
         },
       },
       // {

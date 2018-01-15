@@ -18,7 +18,6 @@ const PluginsList = {
   AppLoading,
 };
 
-console.log(process.env)
 class AppPlugins {
   init(options = {}) {
     const self = this;
@@ -43,8 +42,8 @@ class AppPlugins {
     }
 
     // 开发环境引入模块，生产环境写入样式表
-    console.log(process.env)
-    if (process.env && process.env.NODE_ENV === 'dev') {
+    const env = process.env;
+    if (env && env.NODE_ENV === 'dev') {
       // 有外部样式则不引用内部样式
       if (options.cssLink) {
         const link = document.createElement('link');
@@ -67,25 +66,35 @@ class AppPlugins {
         }
       }
     } else {
-      const cssLink = options.cssLink || null;
+      let cssLink = options.cssLink || null;
 
       if (!cssLink) {
+        let domain = options.domain || null;
 
+        if (!domain) {
+          const url = window.location.href;
+          const matched = url.match(/\/\/(\w*).([\w.]*)\/\w*/);
+
+          if (/bozhong.com/.test(matched[0])) {
+            domain = '//scdn.bozhong.com/source';
+          } else if (matched[1] === 'fe') {
+            domain = '//fe.office.bzdev.net/source/xc';
+          } else {
+            domain = `//source.${matched[2]}`;
+          }
+        }
+
+        const modName = env.PACKAGE_NAME;
+        const modVersion = env.PACKAGE_VERSION;
+        const styleName = options.style || 'trackerrem';
+
+        cssLink = `${domain}/moe/${modName}/${modVersion}/${styleName}.css`;
       }
-
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = cssLink;
 
       document.head.appendChild(link);
-    }
-
-    // 有外部样式则不引用内部样式
-    if (options.cssLink) {
-    } else {
-      // 样式主题，默认孕迹rem
-      self.style = options.style || 'tracker-rem';
-
     }
   }
   initRem(pageWidth = 750) {
