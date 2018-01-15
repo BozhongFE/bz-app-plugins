@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const name = process.env.npm_package_name;
@@ -41,6 +42,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: false, // 启动时，会导致vue-loader的deep失效
+    }),
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      allChunks: false,
     }),
   ],
 });

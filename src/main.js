@@ -28,7 +28,7 @@ Plugins.init({
     'toast',
     'loading',
   ],
-})
+});
 
 new Vue({
   el: '#app',

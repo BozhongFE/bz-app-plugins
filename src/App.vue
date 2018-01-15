@@ -1,34 +1,47 @@
 <template>
   <div id="app">
+    <div class="radio-box">
+      <a href="?style=tracker" class="radio-box__a">tracker</a>
+      <a href="?style=trackerrem" class="radio-box__a">trackerrem</a>
+      <a href="?style=crazy" class="radio-box__a">crazy</a>
+    </div>
     <pre class="code-box">
       <code>
+      // npm安装
+      npm install https://github.com/BozhongFE/bz-app-plugins.git#3.0.0
+
+      import AppPlugins from 'bz-app-plugins';
+      ...
+
       // requirejs引入
-      require(['mod/bz-app-plugins/1.0.0/bz-app-plugins'], function (AppPlugins) {
-
-        // require 引入需过一层default
-
-        // 若页面没有对rem进行处理, width为设计稿尺寸，默认750
-        AppPlugins.default.initRem();
-
-        const plugins = AppPlugins.default.plugins;
-
-        for (const plugin in plugins) {
-          if (plugins[plugin]) Vue.use(plugins[plugin]);
-        }
+      require(['mod/bz-app-plugins/3.0.0/bz-app-plugins'], function (AppPlugins) {
+        ...
       }
 
-      // Vue引入
-      // mod需自行指定路径
-      import AppPlugins from 'mod/bz-app-plugins/1.0.0/bz-app-plugins.js';
+      // 具体使用
+      const Plugins = new AppPlugins;
 
-      // 若页面没有对rem进行处理, width为设计稿尺寸，默认750
-      AppPlugins.initRem(width);
+      // 初始化rem，若外部已有可以省略，但需要pageSize/40的比例，默认750/40
+      Plugins.initRem();
 
-      const plugins = AppPlugins.plugins;
-
-      for (const plugin in AppPlugins) {
-        if (AppPlugins[plugin]) Vue.use(AppPlugins[plugin]);
-      }
+      // 初始化插件
+      Plugins.init({
+        // 必填，内部无Vue，需传入
+        vue: Vue,
+        // 外部传入样式表，配置后不会引入内部样式表，同时style参数无效
+        cssLink: '//source.bozhong.com/m/css/m_bbs_public.css',
+        // 内部样式表，暂含tracker/trackerrem/crazy三种模式，默认trackerrem
+        style: 'crazy',
+        // source域名，用于拼接内部样式表路径，默认指向各环境source
+        domain: '//scdn.bozhong.com/source',
+        // 需安装的插件，暂含alert/confirm/toast/loading，默认全部
+        plugins: [
+          'alert',
+          'confirm',
+          'toast',
+          'loading',
+        ],
+      });
       </code>
     </pre>
     <pre class="code-box">
@@ -41,7 +54,7 @@
       <code class="btn-box__code" codeFor="loading">
       // loading(content = '', timeout, callback) 全非必填, 不能逆序, 不填时间不隐藏
 
-      this.$app.loading();
+      this.$app.loading(2000);
       </code>
       <a class="btn-box__a" href="javascript:" @click="show('loadingText')">loading - 文字</a>
       <code class="btn-box__code" codeFor="loadingText">
@@ -53,7 +66,7 @@
       <a class="btn-box__a" href="javascript:" @click="show('loadingHide')">loadingHide - 关闭</a>
       <code class="btn-box__code" codeFor="loadingHide">
       var self = this;
-      self.$app.loading('loading', 40000);
+      self.$app.loading('loading', 5000);
 
       setTimeout(function(){
 
@@ -85,9 +98,14 @@
       </code>
       <a class="btn-box__a" href="javascript:" @click="show('toastHide')">toastHide - 关闭</a>
       <code class="btn-box__code" codeFor="toastHide">
-      // 手动关闭
+      var self = this;
+      self.$app.toast('toast', 'top');
 
-      this.$app.toastHide();
+      setTimeout(function(){
+
+        // 手动关闭
+        self.$app.toastHide();
+      }, 1000)
       </code>
     </div>
     <pre class="code-box">
@@ -110,9 +128,9 @@
         title: 'title', // 标题
         content: 'content', // 文本
         btnText: 'btnText', // 按钮文案
-        close: false, // 点击确认时是否隐藏弹窗, 默认true
-        maskAbled: false, // 点击遮罩是否可隐藏, 默认true
-        needCloseBtn: false, // 是否显示关闭按钮, 默认true
+        close: true, // 点击确认时是否隐藏弹窗, 默认true
+        maskAbled: true, // 点击遮罩是否可隐藏, 默认true
+        needCloseBtn: true, // 是否显示关闭按钮, 默认true
         onShow() {
           console.log('onShow');
         },
@@ -180,7 +198,7 @@
       <a class="btn-box__a" href="javascript:" @click="show('confirmHide')">confirmHide - 关闭</a>
       <code class="btn-box__code" codeFor="confirmHide">
       var self = this;
-      self.$app.confirm('alert');
+      self.$app.confirm('confirm');
 
       setTimeout(function(){
 
@@ -194,7 +212,6 @@
     <pre class="code-box">
       <code>
       // 后期待补充
-      // 样式主题 - px/rem/换肤
       // 组件形式导出
       </code>
     </pre>
@@ -299,11 +316,25 @@ export default {
     height: 40px;
     line-height: 38px;
     margin: 0 5px;
-    text-decoration: none;
     color: #fff;
+    text-decoration: none;
     text-align: center;
   }
   .btn-box__code {
     display: none;
+  }
+  .radio-box {
+    margin-bottom: 10px;
+  }
+  .radio-box__a {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border:1px solid #d9d9d9;
+    color: #ff8bac;
+    text-decoration: none;
+    text-align: center;
   }
 </style>
