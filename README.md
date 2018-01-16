@@ -22,13 +22,13 @@
 
 ## Example
 
-** npm安装 **
+**npm安装**
 
 ```shell
 npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.0
 ```
 
-** 引用 **
+**引用**
 
 ```js
 // requirejs
@@ -40,7 +40,7 @@ require(['mod/bz-app-plugins/3.0.0/bz-app-plugins'], function (AppPlugins) {
 import AppPlugins from 'bz-app-plugins';
 ```
 
-** 初始化 **
+**初始化**
 
 ```js
 const Plugins = new AppPlugins;
@@ -68,7 +68,7 @@ Plugins.init({
 });
 ```
 
-** 插件使用 **
+**插件使用**
 
 loading
 
@@ -171,7 +171,7 @@ this.$app.confirmHide();
 
 ## 打包
 
-``shell
+```shell
 npm run build  // 打包到模块内
 npm run build:moe // 打包到source/moe
 ```
