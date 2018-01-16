@@ -2,8 +2,6 @@ var path = require('path')
 var webpack = require('webpack')
 var autoprefixer = require('autoprefixer')
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
   // entry: {
   //   // 'bz-app-plugins': './src/main.js',
@@ -27,24 +25,6 @@ module.exports = {
             browsers: ['iOS >= 8', 'Android >= 4.1'],
           })],
         },
-      },
-      // {
-      //   test: /\.less$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader?-autoprefixer',
-      //     'less-loader',
-      //   ],
-      // },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback:'style-loader',
-          use:[
-            'css-loader?-autoprefixer',
-            'less-loader',
-          ]
-        }),
       },
       {
         test: /\.js$/,
@@ -82,7 +62,5 @@ module.exports = {
     hints: false,
   },
   devtool: '#eval-source-map',
-  plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({name: 'tracker', minChunks: Infinity}),
-  ],
+  plugins: [],
 };

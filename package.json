@@ -11,6 +11,10 @@
     "build:moe": "node build/build.moe.js",
     "build": "node build/build.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BozhongFE/bz-app-plugins.git"
+  },
   "dependencies": {
     "vue": "^2.4.4"
   },

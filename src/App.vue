@@ -8,7 +8,7 @@
     <pre class="code-box">
       <code>
       // npm安装
-      npm install https://github.com/BozhongFE/bz-app-plugins.git#3.0.0
+      npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.0
 
       import AppPlugins from 'bz-app-plugins';
       ...

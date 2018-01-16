@@ -24,6 +24,18 @@ module.exports = merge(baseWebpackConfig, {
   // ],
   // devServer: {
   // }
+  module: {
+    rules: [
+       {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader?-autoprefixer',
+          'less-loader',
+        ],
+      },
+    ],
+  },
   plugins: [
     new FriendlyErrorsPlugin(),
     new webpack.DefinePlugin({

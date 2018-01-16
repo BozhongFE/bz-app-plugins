@@ -32,6 +32,20 @@ const webpackConfig = merge(baseWebpackConfig, {
     // publicPath: '',
   },
   devtool: false,
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          fallback:'style-loader',
+          use:[
+            'css-loader?-autoprefixer',
+            'less-loader',
+          ]
+        }),
+      },
+    ],
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
