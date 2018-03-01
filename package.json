@@ -1,7 +1,7 @@
 {
   "name": "bz-app-plugins",
   "description": "bz ",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "xc <xiechun@bozhong.com>",
   "license": "MIT",
   "main": "dist/bz-app-plugins.umd.js",

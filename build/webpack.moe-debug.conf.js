@@ -59,7 +59,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new ExtractTextPlugin({
       filename: '[name].css',
-      allChunks: false,
+      allChunks: true,
     }),
   ],
 });
