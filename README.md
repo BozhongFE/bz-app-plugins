@@ -170,7 +170,6 @@ this.$app.confirmHide();
 |#|3.0.0| 新增外部选择性安装插件/样式风格选择/去掉require引用时的default层/npm安装
 |#|3.0.1| 修正ExtractTextPlugin配置错误
 
-
 ## 打包
 
 ```shell
