@@ -169,6 +169,7 @@ this.$app.confirmHide();
 |#|2.0.0| rem初始化代码由外部控制传参执行
 |#|3.0.0| 新增外部选择性安装插件/样式风格选择/去掉require引用时的default层/npm安装
 |#|3.0.1| 修正ExtractTextPlugin配置错误
+|#|3.0.2| 低版本安卓机es6兼容问题，降低webpack-dev-server版本
 
 ## 打包
 
