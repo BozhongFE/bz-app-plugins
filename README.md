@@ -32,7 +32,7 @@ npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.0
 
 ```js
 // requirejs
-require(['mod/bz-app-plugins/3.0.0/bz-app-plugins'], function (AppPlugins) {
+require(['mod/bz-app-plugins/3.0.2/bz-app-plugins'], function (AppPlugins) {
   ...
 }
 
