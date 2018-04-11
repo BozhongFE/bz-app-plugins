@@ -1,9 +1,8 @@
-'use strict';
 
-import AppAlert from './alert/index.js';
-import AppConfirm from './confirm/index.js';
-import AppToast from './toast/index.js';
-import AppLoading from './loading/index.js';
+import AppAlert from './alert/index';
+import AppConfirm from './confirm/index';
+import AppToast from './toast/index';
+import AppLoading from './loading/index';
 
 // const remind = resolve => require(['src/assets/css/tracker-px.less'], resolve);
 // require.ensure(['src/assets/css/tracker-px.less'], () => {}, 'tracker')

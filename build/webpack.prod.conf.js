@@ -19,5 +19,4 @@ const webpackConfig = merge(moeDebugWebpackConfig, {
   ],
 });
 
-
 module.exports = webpackConfig;

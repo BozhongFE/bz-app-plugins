@@ -23,7 +23,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(modulePath),
     // filename: `${name}-debug.js`,
-    filename: `[name]-debug.js`,
+    filename: '[name]-debug.js',
     libraryTarget: 'umd',
     // library: 'bz-app-plugins',
     libraryExport: 'default',
@@ -37,7 +37,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
-          fallback:'style-loader',
+          fallback: 'style-loader',
           use:[
             'css-loader?-autoprefixer',
             'less-loader',
