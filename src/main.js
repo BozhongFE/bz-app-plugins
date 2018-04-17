@@ -15,18 +15,15 @@ const Plugins = new AppPlugins;
 Plugins.initRem();
 
 Plugins.init({
-  // 内部不含Vue，需外部传入
   vue: Vue,
-  // cssLink配置后不会引入内部样式表
-  // cssLink: '//source.bozhong.com/m/css/m_bbs_public.css',
-  // 内部样式表，暂含tracker/tracker-rem/crazy三种模式，不填默认tracker-rem
-  style,
-  // 需安装的插件，暂含alert/confirm/toast/loading，不填默认全部
+  style: 'trackerrem',
+  // source域名，用于拼接内部样式表路径，默认指向各环境source
+  domain: '//scdn.bozhong.com/source',
   plugins: [
     'alert',
     'confirm',
     'toast',
-    'loading',
+    // 'loading',
   ],
 });
 

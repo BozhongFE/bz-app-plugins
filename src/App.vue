@@ -84,9 +84,9 @@
     <div class="btn-box">
       <a class="btn-box__a" href="javascript:" @click="show('toast')">toast</a>
       <code class="btn-box__code" codeFor="toast">
-      // toast(toastText, timeout, type, callback) 后三个可省, 不能逆序
+      // toast(toastText, timeout, type, callback) 后三个可省, 不能逆序, timeOut为0不自动隐藏
 
-      this.$app.toast('toast(toastText, timeout, type, callback) 后三个可省, 不能逆序', 1500, 'middle', () => {
+      this.$app.toast('toast(toastText, timeout, type, callback) 后三个可省, 不能逆序', 0, 'middle', function() {
         console.log('toast');
       });
       </code>
@@ -125,19 +125,19 @@
       <code class="btn-box__code" codeFor="alertObject">
       // 直接传入对象
       this.$app.alert({
-        title: 'title', // 标题
+        title: '', // 标题
         content: 'content', // 文本
         btnText: 'btnText', // 按钮文案
         close: true, // 点击确认时是否隐藏弹窗, 默认true
         maskAbled: true, // 点击遮罩是否可隐藏, 默认true
         needCloseBtn: true, // 是否显示关闭按钮, 默认true
-        onShow() {
+        onShow: function() {
           console.log('onShow');
         },
-        onHide() {
+        onHide: function() {
           console.log('onHide');
         },
-        onConfirm() {
+        onConfirm: function() {
           console.log('onConfirm');
         },
       });

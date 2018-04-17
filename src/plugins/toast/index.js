@@ -32,7 +32,7 @@ export default ToastPlugin.install = (Vue) => {
       $vm.type = timeOut;
       timeout = 1500;
     } else {
-      timeout = timeOut || 1500;
+      timeout = typeof timeOut === 'number' ? timeOut : 1500;
     }
 
     $vm.currentValue = true;

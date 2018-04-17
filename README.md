@@ -25,7 +25,7 @@
 **npm安装**
 
 ```shell
-npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.0
+npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.2
 ```
 
 **引用**
@@ -88,6 +88,7 @@ toast
 
 ```js
 // toast(toastText, timeout, type, callback) 后三个可省, 不能逆序
+// timeout为0不自动隐藏
 this.$app.toast('toast', 1500, 'middle', () => {
   console.log('toast');
 });
@@ -107,8 +108,8 @@ this.$app.alert('alert');
 
 // 更多配置直接传入对象，所有属性非必填
 this.$app.alert({
-  title: 'title', // 标题
-  content: 'content', // 文本
+  title: 'title', // 标题, 传空字符串则不显示
+  content: 'content', // 文本, 传空字符串则不显示
   btnText: 'btnText', // 按钮文案
   close: true, // 点击确认时是否隐藏弹窗, 默认true
   maskAbled: true, // 点击遮罩是否可隐藏, 默认true
@@ -136,8 +137,8 @@ this.$app.confirm('confirm');
 
 // 更多配置直接传入对象，所有属性非必填
 this.$app.confirm({
-  title: 'title',
-  content: 'content',
+  title: 'title', // 标题, 传空字符串则不显示
+  content: 'content', // 文本, 传空字符串则不显示
   btnTextCancle: 'btnTextCancle',
   btnTextSubmit: 'btnTextSubmit',
   close: false, // 点击确认时是否隐藏弹窗, 默认true
@@ -170,7 +171,7 @@ this.$app.confirmHide();
 |#|3.0.0| 新增外部选择性安装插件/样式风格选择/去掉require引用时的default层/npm安装
 |#|3.0.1| 修正ExtractTextPlugin配置错误
 |#|3.0.2| 低版本安卓机es6兼容问题，降低webpack-dev-server版本
-
+|#|3.0.2| toast可不自动隐藏，弹窗类传空字符串不显示相应的标题/文本
 ## 打包
 
 ```shell

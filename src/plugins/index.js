@@ -28,8 +28,10 @@ class AppPlugins {
 
     // self.plugins = {};
     if (pluginsConf && pluginsConf.length) {
-      for (let p in pluginsConf) {
+      const length = pluginsConf.length;
+      for (let p = 0; p < length; p += 1) {
         const val = pluginsConf[p];
+        if (!val) continue;
         const key = `App${val[0].toUpperCase()}${val.slice(1)}`;
         if (PluginsList[key]) Vue.use(PluginsList[key]);
       }

@@ -31,8 +31,8 @@ export default ConfirmPlugin.install = (Vue) => {
     if (Object.prototype.toString.call(content) === '[object Object]') {
       const obj = content;
 
-      if (obj.content) $vm.content = obj.content;
-      if (obj.title) $vm.title = obj.title;
+      if (obj.hasOwnProperty('content')) $vm.content = obj.content;
+      if (obj.hasOwnProperty('title')) $vm.title = obj.title;
       if (obj.hasOwnProperty('close')) $vm.close = obj.close;
       if (obj.hasOwnProperty('maskAbled')) $vm.maskAbled = obj.maskAbled;
       if (obj.hasOwnProperty('needCloseBtn')) $vm.needCloseBtn = obj.needCloseBtn;
