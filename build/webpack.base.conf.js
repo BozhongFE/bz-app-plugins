@@ -1,5 +1,16 @@
 const path = require('path')
 const autoprefixer = require('autoprefixer')
+const address = require('address');
+
+
+// 获取ip
+const getAddressIP = () => {
+  let lanUrlForConfig = address.ip();
+  if (!/^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(lanUrlForConfig)) {
+    lanUrlForConfig = undefined;
+  }
+  return lanUrlForConfig;
+}
 
 module.exports = {
   // entry: {
@@ -56,6 +67,8 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
+    host: getAddressIP() || '0.0.0.0',
+    port: 8000
   },
   performance: {
     hints: false,

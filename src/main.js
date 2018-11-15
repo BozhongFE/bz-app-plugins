@@ -23,7 +23,7 @@ Plugins.init({
     'alert',
     'confirm',
     'toast',
-    // 'loading',
+    'loading',
   ],
 });
 

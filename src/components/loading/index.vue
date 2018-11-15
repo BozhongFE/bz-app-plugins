@@ -3,7 +3,8 @@
     @touchmove="onTouchMove">
     <!-- <div class="app-loading__mask"></div> -->
     <div class="app-loading__box">
-      <em class="app-loading__icon"></em>
+      <!-- <em class="app-loading__icon"></em> -->
+      <loading unit="6px"></loading>
       <span class="app-loading__content" v-if="content" v-html="content"></span>
       <slot></slot>
     </div>
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+import Loading from '../animation/loading.vue';
   export default {
     name: 'app-loading',
     props: {
@@ -46,6 +48,9 @@
       //   this.$emit('on-show');
       // },
     },
+    components: {
+      Loading
+    }
   };
 </script>
 <style lang="less">

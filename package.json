@@ -7,7 +7,7 @@
   "main": "dist/bz-app-plugins.umd.js",
   "module": "dist/bz-app-plugins.umd.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config build/webpack.dev.conf.js --host 192.168.80.106 --port 8000",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config build/webpack.dev.conf.js --open",
     "build:moe": "node build/build.moe.js",
     "build": "node build/build.js"
   },
@@ -16,6 +16,7 @@
     "url": "https://github.com/BozhongFE/bz-app-plugins.git"
   },
   "dependencies": {
+    "address": "^1.0.3",
     "vue": "^2.5.16"
   },
   "browserslist": [
