@@ -1,6 +1,7 @@
 <template>
   <div class="app-confirm">
     <app-dialog
+    :fontSize="fontSize"
     :value="currentValue"
     :maskAbled="maskAbled"
     :needCloseBtn="needCloseBtn"
@@ -21,8 +22,12 @@
       </div>
       <div class="app-dialog__ft">
         <slot name="btn">
-          <div class="app-dialog__btn app-dialog__btn--default" v-html="btnTextCancle" @click="onClick(false)"></div>
-          <div class="app-dialog__btn app-dialog__btn--primary" v-html="btnTextSubmit" @click="onClick(true)"></div>
+          <div class="app-dialog__btn app-dialog__btn--default" @click="onClick(false)">
+            <span class="app-dialog__btn-text" v-html="btnTextCancle"></span>
+          </div>
+          <div class="app-dialog__btn app-dialog__btn--primary" @click="onClick(true)">
+            <span class="app-dialog__btn-text" v-html="btnTextSubmit"></span>
+          </div>
         </slot>
       </div>
     </app-dialog>
@@ -70,6 +75,11 @@
       close: {
         type: Boolean,
         default: true,
+      },
+      // 字体大小,用于计算样式尺寸
+      fontSize: {
+        type: String,
+        default: '10px',
       },
     },
     data() {

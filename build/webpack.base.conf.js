@@ -1,26 +1,8 @@
 const path = require('path')
 const autoprefixer = require('autoprefixer')
-const address = require('address');
-
-
-// 获取ip
-const getAddressIP = () => {
-  let lanUrlForConfig = address.ip();
-  if (!/^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(lanUrlForConfig)) {
-    lanUrlForConfig = undefined;
-  }
-  return lanUrlForConfig;
-}
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  // entry: {
-  //   // 'bz-app-plugins': './src/main.js',
-  // },
-  // output: {
-  //   path: path.resolve(__dirname, '../dist'),
-  //   filename: process.env.NODE_ENV === 'production' ? '[name].js?[chunkhash]' : '[name].js',
-  //   chunkFilename: '[id].js?[chunkhash]',
-  // },
   module: {
     rules: [
       {
@@ -54,25 +36,41 @@ module.exports = {
           name: '[name].[ext]?[hash]',
         },
       },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader?-autoprefixer',
+          'less-loader',
+        ],
+      },
+      // {
+      //   test: /\.less$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use:[
+      //       'css-loader?-autoprefixer',
+      //       'less-loader',
+      //     ]
+      //   }),
+      // },
     ],
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      'src': path.resolve(__dirname, '../src'),
+      vue$: 'vue/dist/vue.esm.js',
+      src: path.resolve(__dirname, '../src'),
     },
     extensions: ['*', '.js', '.vue', '.json'],
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true,
-    host: getAddressIP() || '0.0.0.0',
-    port: 8000
   },
   performance: {
     hints: false,
   },
   devtool: '#eval-source-map',
-  plugins: [],
+  plugins: [
+    // new ExtractTextPlugin({
+    //   filename: '[name].css',
+    //   allChunks: true,
+    // }),
+  ],
 };

@@ -3,8 +3,10 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const name = process.env.npm_package_name;
 const version = process.env.npm_package_version;
@@ -16,37 +18,18 @@ modulePath = path.join(modulePath, version);
 const webpackConfig = merge(baseWebpackConfig, {
   entry: {
     'bz-app-plugins': './index.js',
-    tracker: './src/assets/css/tracker-px.less',
-    trackerrem: './src/assets/css/tracker-rem.less',
-    crazy: './src/assets/css/crazy-px.less',
   },
   output: {
     path: path.resolve(modulePath),
-    // filename: `${name}-debug.js`,
     filename: '[name]-debug.js',
+    chunkFilename: './[name].js',
     libraryTarget: 'umd',
-    // library: 'bz-app-plugins',
     libraryExport: 'default',
-    // publicPath:'',
-    // chunkFilename: '[name].js',
-    // publicPath: '',
   },
   devtool: false,
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use:[
-            'css-loader?-autoprefixer',
-            'less-loader',
-          ]
-        }),
-      },
-    ],
-  },
+  // externals: ['vue'],
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
@@ -57,9 +40,15 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.LoaderOptionsPlugin({
       minimize: false, // 启动时，会导致vue-loader的deep失效
     }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true,
+    // new ExtractTextPlugin({
+    //   filename: '[name].css',
+    //   allChunks: true,
+    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
     }),
   ],
 });

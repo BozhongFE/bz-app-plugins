@@ -3,7 +3,7 @@ import ConfirmComponent from 'src/components/confirm/index.vue';
 let $vm = null;
 const ConfirmPlugin = {};
 
-export default ConfirmPlugin.install = (Vue) => {
+export default ConfirmPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Confirm = Vue.extend(ConfirmComponent);
     $vm = new Confirm({
@@ -11,70 +11,75 @@ export default ConfirmPlugin.install = (Vue) => {
     });
     document.body.appendChild($vm.$el);
   }
+  // 类型
+  $vm.type = type;
+  // 尺寸
+  $vm.fontSize = fontSize;
+
+  // 插件初始配置
+  const baseConf = {
+    content: '',
+    title: '提示',
+    close: true,
+    maskAbled: true,
+    needCloseBtn: true,
+    btnTextCancle: '取消',
+    btnTextSubmit: '确认',
+    onCancel: null,
+    onConfirm: null,
+    onShow: null,
+    onHide: null,
+  };
+
   // 可直接传入对象
-  const confirm = (content, title, confirmFn) => {
+  const confirm = (...args) => {
 
-    // 初始化数据
-    $vm.title = '提示';
-    $vm.content = '';
-    $vm.btnTextCancle = '取消';
-    $vm.btnTextSubmit = '确认';
-    $vm.close = true;
-    $vm.maskAbled = false;
-    $vm.needCloseBtn = false;
-    let onCancel = null;
-    let onConfirm = null;
-    let onShow = null;
-    let onHide = null;
-
-
-    if (Object.prototype.toString.call(content) === '[object Object]') {
-      const obj = content;
-
-      if (obj.hasOwnProperty('content')) $vm.content = obj.content;
-      if (obj.hasOwnProperty('title')) $vm.title = obj.title;
-      if (obj.hasOwnProperty('close')) $vm.close = obj.close;
-      if (obj.hasOwnProperty('maskAbled')) $vm.maskAbled = obj.maskAbled;
-      if (obj.hasOwnProperty('needCloseBtn')) $vm.needCloseBtn = obj.needCloseBtn;
-      if (obj.btnTextCancle) $vm.btnTextCancle = obj.btnTextCancle;
-      if (obj.btnTextSubmit) $vm.btnTextSubmit = obj.btnTextSubmit;
-      onCancel = obj.onCancel;
-      onConfirm = obj.onConfirm;
-      onShow = obj.onShow;
-      onHide = obj.onHide;
-    } else {
-      if (Object.prototype.toString.call(title) === '[object Function]') {
-        $vm.title = '提示';
-        onConfirm = title;
+    // 插件配置
+    const conf = Object.assign({}, baseConf);
+    // 参数处理
+    const length = args.length;
+    const userConf = {};
+    for (let i = 0; i < length; i += 1) {
+      const arg = args[0];
+      if (typeof arg === 'string') {
+        if (i === 0) {
+          userConf.content = arg;
+        } else {
+          userConf.title = arg;
+        }
       } else {
-        $vm.title = title;
-        onConfirm = confirmFn;
-      }
-      if (Object.prototype.toString.call(content) === '[object Function]') {
-        onConfirm = content;
-      } else {
-        $vm.content = content;
+        const otype = Object.prototype.toString.call(arg);
+        if (otype === '[object Function]') {
+          userConf.onConfirm = arg;
+        } else if (otype === '[object Object]') {
+          Object.assign(userConf, arg);
+        }
       }
     }
+    Object.assign(conf, userConf);
 
+    // 排除掉方法不传到组件内
+    const confKeys = Object.keys(conf);
+    const keyLength = confKeys.length;
+    for (let i = 0; i < keyLength; i += 1) {
+      const key = confKeys[i];
+      if (!/^on.*$/.test(key)) $vm[key] = conf[key];
+    }
+
+    // 事件相关监听
     if ($vm.watcher) $vm.watcher();
     $vm.watcher = $vm.$watch('currentValue', (val) => {
-      if (val && onShow) {
-        onShow($vm);
-      } else if (!val && onHide) {
-        onHide($vm);
-        if ($vm.watcher) $vm.watcher();
-        $vm.watcher = null;
-      }
+      if (val) return conf.onShow && conf.onShow($vm);
+      if ($vm.watcher) $vm.watcher();
+      $vm.watcher = null;
+      return conf.onHide && conf.onHide($vm);
     });
-    $vm.$off('on-cancel');
-    $vm.$off('on-confirm');
 
-    $vm.$on('on-cancel', () => {
-      if (onCancel) onCancel();
+    $vm.$off('on-cancel').$on('on-cancel', () => {
+      return conf.onCancel && conf.onCancel();
     });
-    $vm.$on('on-confirm', () => {
-      if (onConfirm) onConfirm();
+    $vm.$off('on-confirm').$on('on-confirm', () => {
+      return conf.onConfirm && conf.onConfirm();
     });
 
     $vm.currentValue = true;
@@ -85,15 +90,12 @@ export default ConfirmPlugin.install = (Vue) => {
     $vm.currentValue = false;
   };
 
-  if (!Vue.$app) {
-    Vue.$app = {
-      confirm,
-      confirmHide,
-    };
-  } else {
-    Vue.$app.confirm = confirm;
-    Vue.$app.confirmHide = confirmHide;
-  }
+  // 挂到Vue内
+  if (!Vue.$app) Vue.$app = {};
+  Object.assign(Vue.$app, {
+    confirm,
+    confirmHide,
+  });
 
   Vue.mixin({
     created() {

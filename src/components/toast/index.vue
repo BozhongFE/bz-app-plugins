@@ -1,11 +1,16 @@
 <template>
-  <div class="app-toast" :class="[`app-toast--${type}`]" @touchmove="onTouchMove" v-show="currentValue">
+  <div class="app-toast" :class="[`app-toast--${type}`]" 
+    :style="`font-size: ${fontSize}`"
+    @touchmove="onTouchMove"
+    v-show="currentValue">
     <!-- <slot name="icon">
       <i class="app-icon" :class="`app-icon__${icon}`" v-if="icon"></i>
     </slot> -->
-    <slot>
-      <span class="app-toast__main" v-html="toastText"></span>
-    </slot>
+    <div class="app-toast__main">
+      <slot>
+        <div class="app-toast__content" v-html="content"></div>
+      </slot>
+    </div>
   </div>
 </template>
 <script>
@@ -18,9 +23,14 @@
         type: String,
         default: 'middle', // 上中下
       },
-      toastText: {
+      content: {
         type: String,
         default: null,
+      },
+      // 字体大小,用于计算样式尺寸
+      fontSize: {
+        type: String,
+        default: '10px',
       },
       // icon: {
       //   type: String,

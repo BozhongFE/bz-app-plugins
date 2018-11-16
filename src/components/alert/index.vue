@@ -4,12 +4,10 @@
     :value="currentValue"
     :maskAbled="maskAbled"
     :needCloseBtn="needCloseBtn"
+    :fontSize="fontSize"
     @on-hide="onHide"
     @on-show="onShow">
       <div class="app-dialog__hd">
-        <!-- <slot name="icon"> -->
-          <!-- <app-icon :icon="icon" v-if="icon"></app-icon> -->
-        <!-- </slot> -->
         <slot name="title">
           <div class="app-dialog__title" v-html="title" v-if="title"></div>
         </slot>
@@ -21,7 +19,9 @@
       </div>
       <div class="app-dialog__ft">
         <slot name="btn">
-          <div class="app-dialog__btn app-dialog__btn--primary" v-html="btnText" @click="onClick(false)"></div>
+          <div class="app-dialog__btn app-dialog__btn--primary" @click="onConfirm(false)">
+            <span class="app-dialog__btn-text" v-html="btnText"></span>
+          </div>
         </slot>
       </div>
     </app-dialog>
@@ -62,6 +62,11 @@
         type: Boolean,
         default: true,
       },
+      // 字体大小,用于计算样式尺寸
+      fontSize: {
+        type: String,
+        default: '10px',
+      },
     },
     data() {
       return {
@@ -69,7 +74,7 @@
       };
     },
     methods: {
-      onClick() {
+      onConfirm() {
         this.currentValue = !this.close;
         this.$emit('on-confirm');
       },

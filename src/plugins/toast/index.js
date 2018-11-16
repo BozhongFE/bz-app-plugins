@@ -3,7 +3,7 @@ import ToastComponent from 'src/components/toast/index.vue';
 let $vm = null;
 const ToastPlugin = {};
 
-export default ToastPlugin.install = (Vue) => {
+export default ToastPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Toast = Vue.extend(ToastComponent);
     $vm = new Toast({
@@ -11,54 +11,64 @@ export default ToastPlugin.install = (Vue) => {
     });
     document.body.appendChild($vm.$el);
   }
-  // 用于清除延时事件
+
+  // 类型
+  $vm.type = type;
+  // 尺寸
+  $vm.fontSize = fontSize;
+  // 定时器
   let toastTimeOut = null;
-  const toast = (toastText = '', timeOut = 1500, type = 'middle', fn = null) => {
-    $vm.toastText = toastText;
 
-    let callback = fn;
-    let timeout;
+  const toast = (...args) => {
+    if (toastTimeOut) window.clearTimeout(toastTimeOut);
 
-    if (Object.prototype.toString.call(type) === '[object Function]') {
-      callback = type;
-      $vm.type = 'middle';
-    } else {
-      $vm.type = type;
+    $vm.content = '';
+    $vm.type = 'middle';
+    let callback = null;
+    let timeout = 1500;
+
+    // 参数处理
+    const length = args.length;
+    for (let i = 0; i < length; i += 1) {
+      const arg = args[i];
+      if (Object.prototype.toString.call(arg) === '[object Function]') {
+        callback = arg;
+      } else {
+        const otype = typeof arg;
+        if (otype === 'string') {
+          if (i !== 0 && /middle|top|bottom/.test(arg)) {
+            $vm.type = arg;
+          } else {
+            $vm.content = arg;
+          }
+        } else if (otype === 'number') {
+          timeout = arg;
+        }
+      }
     }
-    if (Object.prototype.toString.call(timeOut) === '[object Function]') {
-      callback = timeOut;
-      timeout = 1500;
-    } else if (typeof timeOut === 'string') {
-      $vm.type = timeOut;
-      timeout = 1500;
-    } else {
-      timeout = typeof timeOut === 'number' ? timeOut : 1500;
-    }
-
     $vm.currentValue = true;
-    if (timeout) {
-      toastTimeOut = setTimeout(() => {
-        $vm.currentValue = false;
-        if (callback) callback($vm);
-      }, timeout);
-    }
+
+    // 定时器
+    if (!timeout) return callback && callback($vm);
+
+    toastTimeOut = setTimeout(() => {
+      $vm.currentValue = false;
+      return callback && callback($vm);
+    }, timeout);
   };
 
   // 手动关闭
   const toastHide = () => {
-    window.clearTimeout(toastTimeOut);
+    if (toastTimeOut) window.clearTimeout(toastTimeOut);
     $vm.currentValue = false;
   };
 
-  if (!Vue.$app) {
-    Vue.$app = {
-      toast,
-      toastHide,
-    };
-  } else {
-    Vue.$app.toast = toast;
-    Vue.$app.toastHide = toastHide;
-  }
+  // 挂到Vue内
+  if (!Vue.$app) Vue.$app = {};
+  Object.assign(Vue.$app, {
+    toast,
+    toastHide,
+  });
 
   Vue.mixin({
     created() {

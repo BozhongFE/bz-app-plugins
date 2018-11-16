@@ -3,7 +3,7 @@ import LoadingComponent from 'src/components/loading/index.vue';
 let $vm = null;
 const LoadingPlugin = {};
 
-export default LoadingPlugin.install = (Vue) => {
+export default LoadingPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Loading = Vue.extend(LoadingComponent);
     $vm = new Loading({
@@ -12,55 +12,58 @@ export default LoadingPlugin.install = (Vue) => {
     document.body.appendChild($vm.$el);
   }
 
+  // 类型
+  $vm.type = type;
+  // 尺寸
+  $vm.fontSize = fontSize;
+  // 定时器
   let loadingTimeout = null;
 
-  const loading = (content, timeOut, fn) => {
+  const loading = (...args) => {
+    if (loadingTimeout) window.clearTimeout(loadingTimeout);
 
     $vm.content = '';
-    let callback = fn;
+    let callback = null;
     let timeout = 0;
 
-    if (timeOut) {
-      if (Object.prototype.toString.call(timeOut) === '[object Function]') {
-        callback = timeOut;
+    // 参数处理
+    const length = args.length;
+    for (let i = 0; i < length; i += 1) {
+      const arg = args[i];
+      if (Object.prototype.toString.call(arg) === '[object Function]') {
+        callback = arg;
       } else {
-        timeout = timeOut;
+        const otype = typeof arg;
+        if (otype === 'string') {
+          $vm.content = arg;
+        } else if (otype === 'number') {
+          timeout = arg;
+        }
       }
     }
-    if (content) {
-      if (Object.prototype.toString.call(content) === '[object Function]') {
-        callback = content;
-      } else if (typeof content === 'number') {
-        timeout = content;
-      } else {
-        $vm.content = content;
-      }
-    }
-
     $vm.currentValue = true;
-    if (timeout) {
-      loadingTimeout = setTimeout(() => {
-        $vm.currentValue = false;
-        if (callback) callback($vm);
-      }, timeout);
-    }
+
+    // 定时器
+    if (!timeout) return callback && callback($vm);
+
+    loadingTimeout = setTimeout(() => {
+      $vm.currentValue = false;
+      return callback && callback($vm);
+    }, timeout);
   };
 
   // 手动关闭
   const loadingHide = () => {
-    window.clearTimeout(loadingTimeout);
+    if (loadingTimeout) window.clearTimeout(loadingTimeout);
     $vm.currentValue = false;
   };
 
-  if (!Vue.$app) {
-    Vue.$app = {
-      loading,
-      loadingHide,
-    };
-  } else {
-    Vue.$app.loading = loading;
-    Vue.$app.loadingHide = loadingHide;
-  }
+  // 挂到Vue内
+  if (!Vue.$app) Vue.$app = {};
+  Object.assign(Vue.$app, {
+    loading,
+    loadingHide,
+  });
 
   Vue.mixin({
     created() {

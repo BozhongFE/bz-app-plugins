@@ -3,7 +3,7 @@ import AlertComponent from 'src/components/alert/index.vue';
 let $vm = null;
 const AlertPlugin = {};
 
-export default AlertPlugin.install = (Vue) => {
+export default AlertPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Alert = Vue.extend(AlertComponent);
     $vm = new Alert({
@@ -11,61 +11,72 @@ export default AlertPlugin.install = (Vue) => {
     });
     document.body.appendChild($vm.$el);
   }
+
+  // 类型
+  $vm.type = type;
+  // 尺寸
+  $vm.fontSize = fontSize;
+
+  // 插件初始配置
+  const baseConf = {
+    content: '',
+    title: '提示',
+    close: true,
+    maskAbled: true,
+    needCloseBtn: true,
+    btnText: '确认',
+    onConfirm: null,
+    onShow: null,
+    onHide: null,
+  };
+
   // 可直接传入对象
-  const alert = (content, title, fn) => {
-
-    // 还原数据
-    $vm.content = '';
-    $vm.title = '提示';
-    $vm.close = true;
-    $vm.maskAbled = true;
-    $vm.needCloseBtn = true;
-    $vm.btnText = '确认';
-    let onConfirm = null;
-    let onShow = null;
-    let onHide = null;
-
-    if (Object.prototype.toString.call(content) === '[object Object]') {
-      const obj = content;
-      if (obj.hasOwnProperty('content')) $vm.content = obj.content;
-      if (obj.hasOwnProperty('title')) $vm.title = obj.title;
-      if (obj.hasOwnProperty('close')) $vm.close = obj.close;
-      if (obj.hasOwnProperty('maskAbled')) $vm.maskAbled = obj.maskAbled;
-      if (obj.hasOwnProperty('needCloseBtn')) $vm.needCloseBtn = obj.needCloseBtn;
-      if (obj.btnText) $vm.btnText = obj.btnText;
-      onConfirm = obj.onConfirm;
-      onShow = obj.onShow;
-      onHide = obj.onHide;
-    } else {
-      if (Object.prototype.toString.call(title) === '[object Function]') {
-        $vm.title = '提示';
-        onConfirm = title;
+  const alert = (...args) => {
+    // 插件配置
+    const conf = Object.assign({}, baseConf);
+    // 参数处理
+    const length = args.length;
+    const userConf = {};
+    for (let i = 0; i < length; i += 1) {
+      const arg = args[0];
+      if (typeof arg === 'string') {
+        if (i === 0) {
+          userConf.content = arg;
+        } else {
+          userConf.title = arg;
+        }
       } else {
-        $vm.title = title;
-        onConfirm = fn;
-      }
-      if (Object.prototype.toString.call(content) === '[object Function]') {
-        onConfirm = content;
-      } else {
-        $vm.content = content;
+        const otype = Object.prototype.toString.call(arg);
+        if (otype === '[object Function]') {
+          userConf.onConfirm = arg;
+        } else if (otype === '[object Object]') {
+          Object.assign(userConf, arg);
+        }
       }
     }
+    Object.assign(conf, userConf);
 
+    // 排除掉方法不传到组件内
+    const confKeys = Object.keys(conf);
+    const keyLength = confKeys.length;
+    for (let i = 0; i < keyLength; i += 1) {
+      const key = confKeys[i];
+      if (!/^on.*$/.test(key)) $vm[key] = conf[key];
+    }
+
+    // 事件相关监听
     if ($vm.watcher) $vm.watcher();
     $vm.watcher = $vm.$watch('currentValue', (val) => {
-      if (val && onShow) {
-        onShow($vm);
-      } else if (!val && onHide) {
-        onHide($vm);
-        if ($vm.watcher) $vm.watcher();
-        $vm.watcher = null;
-      }
+      if (val) return conf.onShow && conf.onShow($vm);
+      if ($vm.watcher) $vm.watcher();
+      $vm.watcher = null;
+      return conf.onHide && conf.onHide($vm);
     });
-    $vm.$off('on-confirm');
 
-    $vm.$on('on-confirm', () => {
-      if (onConfirm) onConfirm();
+    $vm.$off('on-confirm').$on('on-confirm', () => {
+      return conf.onConfirm && conf.onConfirm();
     });
+
     $vm.currentValue = true;
   };
 
@@ -74,16 +85,14 @@ export default AlertPlugin.install = (Vue) => {
     $vm.currentValue = false;
   };
 
-  if (!Vue.$app) {
-    Vue.$app = {
-      alert,
-      alertHide,
-    };
-  } else {
-    Vue.$app.alert = alert;
-    Vue.$app.alertHide = alertHide;
-  }
+  // 挂到Vue内
+  if (!Vue.$app) Vue.$app = {};
+  Object.assign(Vue.$app, {
+    alert,
+    alertHide,
+  });
 
+  // 混入
   Vue.mixin({
     created() {
       this.$app = Vue.$app;

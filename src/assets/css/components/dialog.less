@@ -1,4 +1,3 @@
-// @import './base/specs.less';
 
 .app-dialog {
   position: fixed;
@@ -27,31 +26,36 @@
   width: @dialogWidth;
   background-color: #fff;
   border-radius: @dialogBorderRadius;
+  font-size: inherit;
   text-align: center;
   // overflow: hidden;
 }
 .app-dialog__hd {
   padding: @dialogSpacingBdPadding;
   margin-bottom: @dialogSpacinghdMarginBottom;
-  font-size: @dialogFontSizeTitle;
   line-height: @dialogFontLineHeightTitle;
-  color: @dialogColorTitle
+  font-size: inherit;
+  color: @dialogColorTitle;
 }
-.app-dialog__title {}
+.app-dialog__title {
+  font-size: @dialogFontSizeTitle;
+}
 .app-dialog__bd {
   padding: @dialogSpacingBdPadding @dialogSpacingBdPaddingX;
-  font-size: @dialogFontSizeText;
+  font-size: inherit;
   line-height: @dialogFontLineHeightText;
   color: @dialogColorText;
 }
 .app-dialog__hd + .app-dialog__bd {
   padding-top: 0;
 }
-.app-dialog__content {}
+.app-dialog__content {
+  font-size: @dialogFontSizeText;
+}
 .app-dialog__ft {
   display: flex;
-  font-size: @dialogFontSizeBtn;
   border-radius:0 0 @dialogBorderRadius @dialogBorderRadius;
+  font-size: inherit;
   overflow: hidden;
 }
 .app-dialog__btn {
@@ -59,13 +63,16 @@
   height: @dialogFontLineHeightBtn;
   line-height: @dialogFontLineHeightBtn;
   border-top: 1px solid @dialogColorBorderDefault;
-  // font-weight: bold;
+  font-size: inherit;
   &:active {
     background-color: @dialogColorBorderDefault;
   }
   & + .app-dialog__btn {
     border-left: 1px solid @dialogColorBorderDefault;
   }
+}
+.app-dialog__btn-text {
+  font-size: @dialogFontSizeBtn;
 }
 .app-dialog__btn--primary {
   font-weight: @dialogFontWeightBtnPrimary;
@@ -80,6 +87,23 @@
   right: @dialogPositionCloseRight;
   width: @dialogWidthClose;
   height: @dialogHeightClose;
-  background-image: @dialogIconClose;
-  background-size: 100% 100%;
+  font-size: inherit;
+  cursor: pointer;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform-origin: center center;
+    width: @dialogWidthClose;
+    height: @dialogWidthClose * 0.125;
+    border-radius: @dialogWidthClose * 0.065;
+    background-color: #fff;
+  }
+  &:before {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &:after {
+    transform: translateY(-50%) rotate(135deg);
+  }
 }

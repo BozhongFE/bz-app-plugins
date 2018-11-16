@@ -3,7 +3,6 @@
 .app-toast {
   position: fixed;
   left: 0;
-  // transform: translate(-50%, 0);
   width: 100%;
   text-align: center;
   z-index: 250;
@@ -12,13 +11,16 @@
   display: inline-block;
   max-width: @toastWidthMax;
   padding: @toastSpacingPaddingY @toastSpacingPadding;
-  font-size: @toastFontSize;
   background-color: @toastColorBtnDefaultBg;
   color: @toastColor;
-  border-radius: @toastBorderRadius;
+  font-size: inherit;
   line-height: @toastFontLineHeight;
+  border-radius: @toastBorderRadius;
   word-break: break-all;
   box-sizing: border-box;
+}
+.app-toast__content {
+  font-size: @toastFontSize;
 }
 .app-toast--bottom {
   bottom: @toastSpacingMargin;

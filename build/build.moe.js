@@ -64,3 +64,5 @@ webpack(moeDebugwebpackConfigDebug, (err, stats) => {
   }) + '\n\n');
   removeUseLesFile();
 });
+
+require('./build.js');

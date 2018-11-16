@@ -1,5 +1,5 @@
 <template>
-  <main class="loading" :style="`font-size:${unit}`">
+  <main class="loading" :style="`font-size:${fontSize}`">
     <div class="loading-item" v-for="i in 12" :key="i" :style="`transform: rotate(${i * 30}deg)`">
       <em class="loading-item__block"></em>
       <em class="loading-item__block" :style="`animation-delay: ${i * .125}s;`"></em>
@@ -10,7 +10,8 @@
 <script>
   export default {
     props: {
-      unit: {
+      // 字体大小,用于计算样式尺寸
+      fontSize: {
         type: String,
         default: '10px',
       },
@@ -22,25 +23,19 @@
     0% {
       opacity: 1;
     }
-    40% {
-      opacity: 0;
-    }
     100% {
       opacity: 0;
     }
   }
   .loading {
     position: relative;
-    width: 14em;
-    height: 14em;
-    padding: .5em;
+    width: 2.6em;
+    height: 2.6em;
     box-sizing: border-box;
     font-size: inherit;
   }
   .loading-item {
     position: absolute;
-    top: .5em;
-    left: .5em;
     width: 100%;
     height: 100%;
     transform-origin: center center;
@@ -51,14 +46,14 @@
     top: 50%;
     transform: translateY(-50%);
     display: block;
-    width: 4.3em;
-    height: 1.35em;
-    border-radius: 0.675em;
+    width: 0.65em;
+    height: 0.3em;
+    border-radius: 0.15em;
     background-color: #fff;
   }
   .loading-item__block:last-child {
     opacity: 0;
-    background-color: #d4d4d4;
+    background-color: #949497;
     animation-name: colorChange;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;

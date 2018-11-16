@@ -1,5 +1,7 @@
 <template>
-  <div class="app-dialog" @touchmove="onTouchMove" v-show="currentValue">
+  <div class="app-dialog" @touchmove="onTouchMove" 
+    v-show="currentValue" 
+    :style="`font-size: ${fontSize}`">
     <div class="app-dialog__mask" @click="maskAbled && (currentValue = false)"></div>
     <div class="app-dialog__box">
       <slot></slot>
@@ -23,6 +25,11 @@
       needCloseBtn: {
         type: Boolean,
         defalut: false,
+      },
+      // 字体大小,用于计算样式尺寸
+      fontSize: {
+        type: String,
+        default: '10px',
       },
     },
     data() {

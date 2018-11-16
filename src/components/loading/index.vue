@@ -1,10 +1,10 @@
 <template>
   <div class="app-loading" v-show="currentValue"
-    @touchmove="onTouchMove">
-    <!-- <div class="app-loading__mask"></div> -->
+    @touchmove="onTouchMove"
+    :style="`font-size: ${fontSize}`">
     <div class="app-loading__box">
-      <!-- <em class="app-loading__icon"></em> -->
-      <loading unit="6px"></loading>
+      <em class="app-loading__icon" v-if="type === 'crazy'"></em>
+      <loading class="app-loading__loading" :fontSize="fontSize" v-else></loading>
       <span class="app-loading__content" v-if="content" v-html="content"></span>
       <slot></slot>
     </div>
@@ -13,45 +13,55 @@
 
 <script>
 import Loading from '../animation/loading.vue';
-  export default {
-    name: 'app-loading',
-    props: {
-      currentValue: {
-        type: Boolean,
-        default: false,
-      },
-      content: {
-        type: String,
-        defalut: null,
-      },
+export default {
+  name: 'app-loading',
+  props: {
+    currentValue: {
+      type: Boolean,
+      default: false,
     },
-    data() {
-      return {
-      };
+    content: {
+      type: String,
+      defalut: null,
     },
-    watch: {
-      // currentValue(val) {
-      //   const self = this;
-      //   if (val) return self.onShow();
-      //   return self.onHide();
-      // },
+    // 字体大小,用于计算样式尺寸
+    fontSize: {
+      type: String,
+      default: '10px',
     },
-    methods: {
-      onTouchMove(event) {
-        event.preventDefault();
-      },
-      // onHide() {
-      //   this.currentValue = false;
-      //   this.$emit('on-hide');
-      // },
-      // onShow() {
-      //   this.$emit('on-show');
-      // },
+    // loading图标类型
+    type: {
+      type: String,
+      default: 'crazy',
     },
-    components: {
-      Loading
-    }
-  };
+  },
+  data() {
+    return {
+    };
+  },
+  watch: {
+    // currentValue(val) {
+    //   const self = this;
+    //   if (val) return self.onShow();
+    //   return self.onHide();
+    // },
+  },
+  methods: {
+    onTouchMove(event) {
+      event.preventDefault();
+    },
+    // onHide() {
+    //   this.currentValue = false;
+    //   this.$emit('on-hide');
+    // },
+    // onShow() {
+    //   this.$emit('on-show');
+    // },
+  },
+  components: {
+    Loading
+  }
+};
 </script>
 <style lang="less">
 </style>

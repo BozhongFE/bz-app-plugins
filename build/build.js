@@ -9,11 +9,11 @@ const webpackConfig = require('./webpack.prod.conf');
 const assetsPath = path.join(__dirname, '../dist');
 shell.rm('-rf', assetsPath);
 
-const removeUseLesFile = () => {
-  // 移除多余的文件（为导出css而多出来的文件）
-  shell.rm('-rf', `${assetsPath}/!(bz-app-plugins|bz-app-plugins-debug).umd.js`);
-  shell.rm('-rf', `${assetsPath}/bz-app-plugins.css`);
-};
+// const removeUseLesFile = () => {
+//   // 移除多余的文件（为导出css而多出来的文件）
+//   shell.rm('-rf', `${assetsPath}/!(bz-app-plugins|bz-app-plugins-debug).umd.js`);
+//   shell.rm('-rf', `${assetsPath}/bz-app-plugins.css`);
+// };
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
@@ -24,5 +24,5 @@ webpack(webpackConfig, (err, stats) => {
     chunks: false,
     chunkModules: false,
   }) + '\n\n');
-  removeUseLesFile();
+  // removeUseLesFile();
 })

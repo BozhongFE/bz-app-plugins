@@ -14,14 +14,6 @@
   height: 100%;
   z-index: 200;
 }
-.app-loading__mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: @colorMask;
-}
 .app-loading__box {
   position: relative;
   display: flex;
@@ -31,6 +23,7 @@
   width: @loadingWidth;
   height: @loadingHeight;
   padding: @loadingSpacingPaddingY @loadingSpacingPaddingX;
+  font-size: inherit;
   background-color: @colorMask;
   border-radius: @loadingBorderRadius;
 }
@@ -41,8 +34,12 @@
   background-image: @loadingIcon;
   background-size: 100% 100%;
 }
+.app-loading__loading,
+.app-loading__icon
+ {
+  margin-bottom: @loadingIconMarginBottom;
+}
 .app-loading__content {
-  margin-top: @loadingSpacingTextMarginTop;
   font-size: @loadingFontSizeText;
   color: @loadingColorText;
 }
