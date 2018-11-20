@@ -1,8 +1,19 @@
-const path = require('path')
-const autoprefixer = require('autoprefixer')
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  entry: {
+    'bz-app-plugins': './index.js',
+  },
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+  },
   module: {
     rules: [
       {
@@ -36,24 +47,24 @@ module.exports = {
           name: '[name].[ext]?[hash]',
         },
       },
+      // {
+      //   test: /.(css|less)$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: [
+      //       'css-loader?-autoprefixer',
+      //       'less-loader',
+      //     ],
+      //   }),
+      // },
       {
-        test: /\.less$/,
+        test: /\.(css|less)$/,
         use: [
           'style-loader',
           'css-loader?-autoprefixer',
           'less-loader',
         ],
       },
-      // {
-      //   test: /\.less$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use:[
-      //       'css-loader?-autoprefixer',
-      //       'less-loader',
-      //     ]
-      //   }),
-      // },
     ],
   },
   resolve: {
@@ -66,11 +77,15 @@ module.exports = {
   performance: {
     hints: false,
   },
-  devtool: '#eval-source-map',
   plugins: [
-    // new ExtractTextPlugin({
-    //   filename: '[name].css',
-    //   allChunks: true,
-    // }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false, // 启动时，会导致vue-loader的deep失效
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
+    }),
   ],
 };

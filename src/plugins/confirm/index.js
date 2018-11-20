@@ -3,7 +3,7 @@ import ConfirmComponent from 'src/components/confirm/index.vue';
 let $vm = null;
 const ConfirmPlugin = {};
 
-export default ConfirmPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
+export default ConfirmPlugin.install = (Vue, { fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Confirm = Vue.extend(ConfirmComponent);
     $vm = new Confirm({
@@ -11,8 +11,6 @@ export default ConfirmPlugin.install = (Vue, { type = 'crazy', fontSize = '10px'
     });
     document.body.appendChild($vm.$el);
   }
-  // 类型
-  $vm.type = type;
   // 尺寸
   $vm.fontSize = fontSize;
 

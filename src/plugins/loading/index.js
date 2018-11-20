@@ -3,7 +3,7 @@ import LoadingComponent from 'src/components/loading/index.vue';
 let $vm = null;
 const LoadingPlugin = {};
 
-export default LoadingPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
+export default LoadingPlugin.install = (Vue, { fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Loading = Vue.extend(LoadingComponent);
     $vm = new Loading({
@@ -12,8 +12,6 @@ export default LoadingPlugin.install = (Vue, { type = 'crazy', fontSize = '10px'
     document.body.appendChild($vm.$el);
   }
 
-  // 类型
-  $vm.type = type;
   // 尺寸
   $vm.fontSize = fontSize;
   // 定时器

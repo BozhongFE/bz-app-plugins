@@ -3,7 +3,7 @@ import ToastComponent from 'src/components/toast/index.vue';
 let $vm = null;
 const ToastPlugin = {};
 
-export default ToastPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
+export default ToastPlugin.install = (Vue, { fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Toast = Vue.extend(ToastComponent);
     $vm = new Toast({
@@ -12,8 +12,6 @@ export default ToastPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' }
     document.body.appendChild($vm.$el);
   }
 
-  // 类型
-  $vm.type = type;
   // 尺寸
   $vm.fontSize = fontSize;
   // 定时器

@@ -1,13 +1,36 @@
 
-
+const path = require('path');
 const merge = require('webpack-merge');
 
-const moeDebugWebpackConfig = require('./webpack.moe-debug.conf');
+const baseWebpackConfig = require('./webpack.base.conf');
+const cssWebpackConfig = require('./webpack.css.conf');
 
-// const name = process.env.npm_package_name;
+const name = process.env.npm_package_name;
+const version = process.env.npm_package_version;
+let modulePath = process.env.npm_config_bz_mod;
 
-const webpackConfig = merge(moeDebugWebpackConfig, {
+modulePath = path.join(modulePath, name);
+modulePath = path.join(modulePath, version);
+
+const webpackConfig = merge(baseWebpackConfig, {
+  output: {
+    path: path.resolve(modulePath),
+    filename: '[name].js',
+  },
 });
-webpackConfig.output.filename = `[name].js`;
 
-module.exports = webpackConfig;
+module.exports = [
+  webpackConfig,
+  merge(webpackConfig, {
+    output: {
+      filename: '[name]-debug.js',
+    },
+  }),
+  merge(cssWebpackConfig, {
+    output: {
+      path: path.resolve(modulePath),
+    },
+    plugins: [
+    ],
+  }),
+];

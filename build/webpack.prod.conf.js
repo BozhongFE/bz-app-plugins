@@ -1,14 +1,16 @@
-const path = require('path');
+
 const merge = require('webpack-merge');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const moeDebugWebpackConfig = require('./webpack.moe-debug.conf');
+const baseWebpackConfig = require('./webpack.base.conf');
 
-const webpackConfig = merge(moeDebugWebpackConfig, {
+const webpackConfig = merge(baseWebpackConfig, {
   output: {
-    path: path.resolve(__dirname, '../dist'),
     filename: '[name].umd.js',
-    chunkFilename: './[name].js',
   },
+  plugins: [
+    new BundleAnalyzerPlugin(),
+  ],
 });
 
 module.exports = webpackConfig;

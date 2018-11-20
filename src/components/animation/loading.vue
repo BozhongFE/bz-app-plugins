@@ -1,5 +1,5 @@
 <template>
-  <main class="loading" :style="`font-size:${fontSize}`">
+  <main class="animation-loading">
     <div class="loading-item" v-for="i in 12" :key="i" :style="`transform: rotate(${i * 30}deg)`">
       <em class="loading-item__block"></em>
       <em class="loading-item__block" :style="`animation-delay: ${i * .125}s;`"></em>
@@ -8,17 +8,17 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      // 字体大小,用于计算样式尺寸
-      fontSize: {
-        type: String,
-        default: '10px',
-      },
-    },
-  }
+  // export default {
+  //   // props: {
+  //   //   // 字体大小,用于计算样式尺寸
+  //   //   fontSize: {
+  //   //     type: String,
+  //   //     default: '10px',
+  //   //   },
+  //   // },
+  // }
 </script>
-<style less scoped>
+<style lang="less" scoped>
   @keyframes colorChange {
     0% {
       opacity: 1;
@@ -27,7 +27,7 @@
       opacity: 0;
     }
   }
-  .loading {
+  .animation-loading {
     position: relative;
     width: 2.6em;
     height: 2.6em;

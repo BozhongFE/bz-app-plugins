@@ -1,15 +1,25 @@
 import Vue from 'vue';
 import App from './App.vue';
 
+// import AppPlugins from './plugins/index.js';
 import AppPlugins from './plugins/index.js';
 
 const url = window.location.href;
-const matched = url.match(/[\?|&]style=([^&]*)(&|$)/);
+const matched = url.match(/[\?|&]style=([^&]*)(&|$)/) || [];
 
-let type = null;
-if (matched && matched[1]) type = matched[1];
+switch(matched[1]) {
+  case 'crazy':
+    require.ensure([], () => {
+      require('./assets/css/crazy.less');
+    })
+    break;
+  default:
+    require.ensure([], () => {
+      require('./assets/css/tracker.less');
+    });
+}
 
-const Plugins = new AppPlugins({
+new AppPlugins({
   vue: Vue,
   // source域名，用于拼接内部样式表路径，默认指向各环境source
   domain: '//scdn.bozhong.com/source',
@@ -20,14 +30,9 @@ const Plugins = new AppPlugins({
     'loading',
   ],
   base: {
-    fontSize: '10px',
-    type,
+    fontSize: '10px', // 样式衡量单位，内部设计稿为375px, 衡量单位为10px，请传入相对于页面的10px
   },
 });
-
-// 初始化rem，若外部已有可以省略，但需要pageSize/40的比例
-// Plugins.initRem();
-
 
 new Vue({
   el: '#app',

@@ -3,7 +3,7 @@ import AlertComponent from 'src/components/alert/index.vue';
 let $vm = null;
 const AlertPlugin = {};
 
-export default AlertPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' } = {}) => {
+export default AlertPlugin.install = (Vue, { fontSize = '10px' } = {}) => {
   if (!$vm) {
     const Alert = Vue.extend(AlertComponent);
     $vm = new Alert({
@@ -12,8 +12,6 @@ export default AlertPlugin.install = (Vue, { type = 'crazy', fontSize = '10px' }
     document.body.appendChild($vm.$el);
   }
 
-  // 类型
-  $vm.type = type;
   // 尺寸
   $vm.fontSize = fontSize;
 

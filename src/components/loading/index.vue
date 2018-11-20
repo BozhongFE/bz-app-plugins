@@ -3,8 +3,8 @@
     @touchmove="onTouchMove"
     :style="`font-size: ${fontSize}`">
     <div class="app-loading__box">
-      <em class="app-loading__icon" v-if="type === 'crazy'"></em>
-      <loading class="app-loading__loading" :fontSize="fontSize" v-else></loading>
+      <em class="app-loading__icon"></em>
+      <loading class="app-loading__loading"></loading>
       <span class="app-loading__content" v-if="content" v-html="content"></span>
       <slot></slot>
     </div>
@@ -28,11 +28,6 @@ export default {
     fontSize: {
       type: String,
       default: '10px',
-    },
-    // loading图标类型
-    type: {
-      type: String,
-      default: 'crazy',
     },
   },
   data() {
@@ -63,5 +58,3 @@ export default {
   }
 };
 </script>
-<style lang="less">
-</style>

@@ -5,7 +5,6 @@ const path = require('path');
 const shell = require('shelljs');
 const webpack = require('webpack');
 const moewebpackConfig = require('./webpack.moe.conf');
-const moeDebugwebpackConfigDebug = require('./webpack.moe-debug.conf');
 
 // 判断目标目录路径等
 const exists = fs.existsSync;
@@ -35,34 +34,22 @@ const assetsPath = path.resolve(modulePath);
 // 移除子文件夹外的文件
 shell.rm('-rf', `${assetsPath}/*.*`);
 
-const removeUseLesFile = () => {
-  // 移除多余的文件（为导出css而多出来的文件）
-  shell.rm('-rf', `${assetsPath}/!(bz-app-plugins|bz-app-plugins-debug).js`);
-  shell.rm('-rf', `${assetsPath}/bz-app-plugins.css`);
-};
-
 webpack(moewebpackConfig, (err, stats) => {
   if (err) throw err;
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-  }) + '\n\n');
-  removeUseLesFile();
-});
 
-webpack(moeDebugwebpackConfigDebug, (err, stats) => {
-  if (err) throw err;
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false,
-  }) + '\n\n');
-  removeUseLesFile();
+  const statsArr = stats.stats || [stats];
+  const length = statsArr.length;
+
+  for (let i = 0; i < length; i += 1) {
+    console.log(`path: ${assetsPath}`);
+    process.stdout.write(statsArr[i].toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false,
+    }) + '\n\n');
+  }
 });
 
 require('./build.js');
