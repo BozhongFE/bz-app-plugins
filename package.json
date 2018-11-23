@@ -8,6 +8,7 @@
   "module": "dist/bz-app-plugins.umd.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config build/webpack.dev.conf.js --open",
+    "build:dll": "webpack --config build/webpack.dll.conf.js",
     "build:moe": "node build/build.moe.js",
     "build": "node build/build.js"
   },
@@ -16,7 +17,8 @@
     "url": "https://github.com/BozhongFE/bz-app-plugins.git"
   },
   "dependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "browserslist": [
     "> 1%",
@@ -57,7 +59,7 @@
     "url-loader": "^0.6.2",
     "vue-loader": "^13.7.1",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^3.11.0",
+    "webpack": "^3.12.0",
     "webpack-dev-server": "^2.11.2",
     "webpack-merge": "^4.1.2"
   }

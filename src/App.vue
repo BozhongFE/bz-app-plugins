@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <div class="radio-box">
-      <a href="?style=tracker" class="radio-box__a">tracker</a>
-      <a href="?style=trackerrem" class="radio-box__a">trackerrem</a>
-      <a href="?style=crazy" class="radio-box__a">crazy</a>
+      <a href="?style=tracker" class="radio-box__a" target="_blank">tracker</a>
+      <a href="?style=crazy" class="radio-box__a" target="_blank">crazy</a>
     </div>
     <pre class="code-box">
       <code>

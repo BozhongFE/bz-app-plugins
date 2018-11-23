@@ -12,11 +12,6 @@ const PluginsList = {
 
 class AppPlugins {
   constructor(options) {
-    this.options = options;
-    this.init();
-  }
-  init() {
-    const options = this.options;
     // 若无配置插件列表，则安装全部插件
     const pluginsConf = options.plugins || Object.keys(PluginsList);
     // 外部传入Vue
@@ -29,6 +24,17 @@ class AppPlugins {
         const key = `App${val[0].toUpperCase()}${val.slice(1)}`;
         if (PluginsList[key]) Vue.use(PluginsList[key], options.base);
       }
+    }  
+    // 有外部样式则不引用内部样式
+    if (options.cssLink) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = options.cssLink;
+
+      document.head.appendChild(link);
+    } else {
+      const type = options.type || 'crazy';
+      require(`css/${type}.css`);
     }
   }
 }

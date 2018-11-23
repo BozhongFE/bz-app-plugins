@@ -1,13 +1,14 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+
 module.exports = {
   entry: {
-    crazy: 'src/assets/css/crazy.less',
-    tracker: 'src/assets/css/tracker.less',
+    tracker: 'css/tracker.less',
+    crazy: 'css/crazy.less',
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../css'),
     filename: '[name].css',
     chunkFilename: '[name].css',
     publicPath: './',
@@ -37,6 +38,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       src: path.resolve(__dirname, '../src'),
+      css: path.resolve(__dirname, '../src/assets/css'),
     },
     extensions: ['*', '.js', '.vue', '.json'],
   },
@@ -45,5 +47,5 @@ module.exports = {
       filename: '[name].css',
       allChunks: true,
     }),
-  ]
+  ],
 };

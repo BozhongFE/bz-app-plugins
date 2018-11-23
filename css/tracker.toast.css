@@ -1,0 +1,32 @@
+.app-toast {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 250;
+}
+.app-toast__main {
+  display: inline-block;
+  max-width: 28em;
+  padding: 0.95em 1.7em;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: inherit;
+  line-height: 2.1em;
+  border-radius: 2em;
+  word-break: break-all;
+  box-sizing: border-box;
+}
+.app-toast__content {
+  font-size: 1.4em;
+}
+.app-toast--bottom {
+  bottom: 2.5em;
+}
+.app-toast--middle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.app-toast--top {
+  top: 2.5em;
+}

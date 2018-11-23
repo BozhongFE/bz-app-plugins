@@ -71,6 +71,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       src: path.resolve(__dirname, '../src'),
+      css: path.resolve(__dirname, '../css'),
     },
     extensions: ['*', '.js', '.vue', '.json'],
   },
@@ -80,12 +81,6 @@ module.exports = {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       minimize: false, // 启动时，会导致vue-loader的deep失效
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
     }),
   ],
 };

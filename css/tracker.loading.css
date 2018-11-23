@@ -1,0 +1,45 @@
+.animation-loading {
+  font-size: 1em;
+}
+.app-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-all;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+.app-loading__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 0;
+  font-size: inherit;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+}
+.app-loading__icon {
+  display: inline-block;
+  width: 2.6em;
+  height: 2.6em;
+  background-image: '';
+  background-size: 100% 100%;
+}
+.app-loading__loading,
+.app-loading__icon {
+  margin-bottom: 1em;
+}
+.app-loading__content {
+  font-size: 1.4em;
+  color: #fff;
+}

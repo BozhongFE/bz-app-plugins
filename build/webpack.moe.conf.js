@@ -1,6 +1,7 @@
 
 const path = require('path');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 
 const baseWebpackConfig = require('./webpack.base.conf');
 const cssWebpackConfig = require('./webpack.css.conf');
@@ -20,17 +21,26 @@ const webpackConfig = merge(baseWebpackConfig, {
 });
 
 module.exports = [
-  webpackConfig,
+  merge(webpackConfig, {
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+          warnings: false,
+        },
+      }),
+    ]
+  }),
+  // moe-debug
   merge(webpackConfig, {
     output: {
       filename: '[name]-debug.js',
     },
   }),
+  // css
   merge(cssWebpackConfig, {
     output: {
       path: path.resolve(modulePath),
     },
-    plugins: [
-    ],
   }),
 ];
