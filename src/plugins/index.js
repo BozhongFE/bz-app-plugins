@@ -32,9 +32,6 @@ class AppPlugins {
       link.href = options.cssLink;
 
       document.head.appendChild(link);
-    } else {
-      const type = options.type || 'crazy';
-      require(`css/${type}.css`);
     }
   }
 }

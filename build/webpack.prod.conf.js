@@ -35,10 +35,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         warnings: false,
       },
     }),
-    new webpack.DllReferencePlugin({
-      manifest: require('../dist/css-manifest.json'),
-      scope: 'css',
-    })
   ],
 });
 

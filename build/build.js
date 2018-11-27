@@ -10,7 +10,7 @@ const assetsPath = path.join(__dirname, '../dist');
 const cssPath = path.join(__dirname, '../css');
 const libPath = path.join(__dirname, '../lib');
 
-shell.rm('-rf', `${assetsPath}/.*!(\.dll\.|-manifest).*`);
+shell.rm('-rf', assetsPath);
 shell.rm('-rf', cssPath);
 shell.rm('-rf', libPath);
 

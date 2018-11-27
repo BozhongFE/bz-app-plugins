@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-// import AppPlugins from './plugins/index.js';
 import AppPlugins from './plugins/index.js';
+// import AppPlugins from '../dist/bz-app-plugins.umd.js';
 
 const url = window.location.href;
 const matched = url.match(/[\?|&]style=([^&]*)(&|$)/) || [];
