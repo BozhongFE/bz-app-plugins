@@ -1,5 +1,5 @@
 .animation-loading {
-  font-size: 0;
+  font-size: 0 !important;
 }
 .app-loading {
   position: fixed;

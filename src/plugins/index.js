@@ -1,27 +1,26 @@
-import AppAlert from './alert/index';
-import AppConfirm from './confirm/index';
-import AppToast from './toast/index';
-import AppLoading from './loading/index';
+import Alert from './alert/index';
+import Confirm from './confirm/index';
+import Toast from './toast/index';
+import Loading from './loading/index';
+import Vue from 'vue';
 
 const PluginsList = {
-  AppAlert,
-  AppConfirm,
-  AppToast,
-  AppLoading,
+  Alert,
+  Confirm,
+  Toast,
+  Loading,
 };
 
 class AppPlugins {
   constructor(options) {
     // 若无配置插件列表，则安装全部插件
     const pluginsConf = options.plugins || Object.keys(PluginsList);
-    // 外部传入Vue
-    const Vue = options.vue;
     // 安装插件
     const length = pluginsConf.length;
     for (let i = 0; i < length; i += 1) {
       const val = pluginsConf[i];
       if (val) {
-        const key = `App${val[0].toUpperCase()}${val.slice(1)}`;
+        const key = `${val[0].toUpperCase()}${val.slice(1)}`;
         if (PluginsList[key]) Vue.use(PluginsList[key], options.base);
       }
     }  

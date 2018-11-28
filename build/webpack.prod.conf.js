@@ -27,6 +27,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       return name === 'bz-app-plugins' ? `${name}.umd.js` : `${name}.js`;
     },
   },
+  externals: ['vue'],
   plugins: [
     new BundleAnalyzerPlugin(),
     new webpack.optimize.UglifyJsPlugin({

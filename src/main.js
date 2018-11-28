@@ -1,36 +1,28 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-import AppPlugins from './plugins/index.js';
-// import AppPlugins from '../dist/bz-app-plugins.umd.js';
+// import AppPlugins from './plugins/index.js';
+import AppPlugins from '../dist/bz-app-plugins.umd.js';
 
 const url = window.location.href;
 const matched = url.match(/[\?|&]style=([^&]*)(&|$)/) || [];
 
-switch(matched[1]) {
-  case 'crazy':
-    require.ensure([], () => {
-      require('./assets/css/crazy.less');
-    })
-    break;
-  default:
-    require.ensure([], () => {
-      require('./assets/css/tracker.less');
-    });
-}
+const classType = matched[1] === 'tracker' ? 'tracker' : 'crazy';
+import(`../css/${classType}.css`);
 
-new AppPlugins({
-  vue: Vue,
-  // source域名，用于拼接内部样式表路径，默认指向各环境source
-  domain: '//scdn.bozhong.com/source',
+new AppPlugins({ 
+  // 需要安装的插件。选填。默认全部，
   plugins: [
     'alert',
     'confirm',
     'toast',
     'loading',
   ],
+  // 若不引入内置的样式表，可外部传入
+  cssLink: 'xxx.css',
   base: {
-    fontSize: '10px', // 样式衡量单位，内部设计稿为375px, 衡量单位为10px，请传入相对于页面的10px
+    // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px
+    fontSize: '10px', 
   },
 });
 

@@ -18,6 +18,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: path.resolve(modulePath),
     filename: '[name].js',
   },
+  externals: ['vue'],
 });
 
 module.exports = [

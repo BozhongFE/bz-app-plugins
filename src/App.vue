@@ -7,40 +7,31 @@
     <pre class="code-box">
       <code>
       // npm安装
-      npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.0
+      npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
 
-      import AppPlugins from 'bz-app-plugins';
+      import AppPlugins from 'bz-app-plugins'; // 按需引入脚本文件，最底部有脚本列表
+      import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
       ...
 
       // requirejs引入
-      require(['mod/bz-app-plugins/3.0.0/bz-app-plugins'], function (AppPlugins) {
+      require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
         ...
       }
 
       // 具体使用
-      const Plugins = new AppPlugins;
-
-      // 初始化rem，若外部已有可以省略，但需要pageSize/40的比例，默认750/40
-      Plugins.initRem();
-
-      // 初始化插件
-      Plugins.init({
-        // 必填，内部无Vue，需传入
+      new AppPlugins({
         vue: Vue,
-        // 外部传入样式表，配置后不会引入内部样式表，同时style参数无效
-        cssLink: '//source.bozhong.com/m/css/m_bbs_public.css',
-        // 内部样式表，暂含tracker/trackerrem/crazy三种模式，默认trackerrem
-        style: 'crazy',
-        // source域名，用于拼接内部样式表路径，默认指向各环境source
-        domain: '//scdn.bozhong.com/source',
-        // 需安装的插件，暂含alert/confirm/toast/loading，默认全部
         plugins: [
           'alert',
           'confirm',
           'toast',
           'loading',
         ],
+        base: {
+          fontSize: '10px', // 样式衡量单位，内部设计稿为375px, 衡量单位为10px，请传入相对于页面的10px
+        },
       });
+
       </code>
     </pre>
     <pre class="code-box">
@@ -224,10 +215,11 @@ export default {
   data() {
     return {
       useCode: '',
-      toastCode: null,
-      alertCode: null,
-      confirmCode: null,
-      loadingCode: null,
+      toastCode: '',
+      alertCode: '',
+      confirmCode: '',
+      loadingCode: '',
+      initCode: '',
     };
   },
   components: {
