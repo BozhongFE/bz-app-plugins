@@ -19,16 +19,19 @@
       }
 
       // 具体使用
-      new AppPlugins({
-        vue: Vue,
+      new AppPlugins({ 
+        // 需要安装的插件。默认全部，选填。
         plugins: [
           'alert',
           'confirm',
           'toast',
           'loading',
         ],
+        // 若不引入内置的样式表，可外部传入，选填。
+        cssLink: 'xxx.css',
         base: {
-          fontSize: '10px', // 样式衡量单位，内部设计稿为375px, 衡量单位为10px，请传入相对于页面的10px
+          // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px，选填。
+          fontSize: '10px', 
         },
       });
 
@@ -201,8 +204,8 @@
     </div>
     <pre class="code-box">
       <code>
-      // 后期待补充
-      // 组件形式导出
+      // 模块列表
+      // 样式列表
       </code>
     </pre>
   </div>
