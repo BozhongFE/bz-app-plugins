@@ -14,6 +14,8 @@
       ...
 
       // requirejs引入
+      <link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
+      
       require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
         ...
       }
@@ -204,8 +206,37 @@
     </div>
     <pre class="code-box">
       <code>
-      // 模块列表
-      // 样式列表
+      <!-- 模块列表, 按需引入 -->
+      // 引入所有插件，无样式
+      bz-app-plugins
+
+      // 直接引入单个插件，无样式
+      bz-app-plugins/lib/alert.js
+      bz-app-plugins/lib/confirm.js
+      bz-app-plugins/lib/loading.js
+      bz-app-plugins/lib/toast.js
+
+      <!-- 样式列表，按需引入 -->
+      // 所有模块的样式, 按主题区分，只需引入其中一个
+      bz-app-plugins/css/crazy.css
+      bz-app-plugins/css/tracker.css
+      
+      // 单个插件的样式，按主题及插件区分，按需引入
+      // alert和confirm引入.dialog.css
+      bz-app-plugins/css/crazy.dialog.css
+      bz-app-plugins/css/crazy.loading.css
+      bz-app-plugins/css/crazy.toast.css
+      bz-app-plugins/css/tracker.dialog.css
+      bz-app-plugins/css/tracker.loading.css
+      bz-app-plugins/css/tracker.toast.css
+
+      <!-- 组件列表，若只需要组件时引入, 除animation，其他不含样式 -->
+      bz-app-plugins/lib/components/alert.js
+      bz-app-plugins/lib/components/confirm.js
+      bz-app-plugins/lib/components/dialog.js
+      bz-app-plugins/lib/components/loading.js
+      bz-app-plugins/lib/components/toast.js
+      bz-app-plugins/lib/components/animation/loading.js // loading菊花图
       </code>
     </pre>
   </div>

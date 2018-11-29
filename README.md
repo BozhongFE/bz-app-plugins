@@ -1,38 +1,23 @@
 # bz-app-plugins
 播种网web通用控件
 
-## 接口
-
-`initRem(pageSize)`
-
-  初始化rem，若外部已有可以省略，但需要pageSize/40的比例，默认750/40
-
-`init(option)`
-
-  **Arguments**
-
-  - `option` (Object)
-    - `vue` (Object) 必填，Vue实例
-    - `cssLink` (String) 可选，外部传入样式表，配置后不会引入内部样式表，同时style参数无效
-    - `style` (String) 可选，内部样式表，暂含tracker/trackerrem/crazy三种模式，默认trackerrem
-    - `domain` (String) 可选，source域名，用于拼接内部样式表路径，默认指向各环境source
-    - `plugins` (Array) 可选，需安装的插件，暂含alert/confirm/toast/loading，默认全部
-
-内部插件具体使用看Example ↓↓
-
 ## Example
 
 **npm安装**
 
 ```shell
-npm install https://github.com/BozhongFE/bz-app-plugins#v3.0.2
+npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
 ```
 
 **引用**
 
 ```js
 // requirejs
-require(['mod/bz-app-plugins/3.0.2/bz-app-plugins'], function (AppPlugins) {
+
+<link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
+      
+
+require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
   ...
 }
 
@@ -43,28 +28,20 @@ import AppPlugins from 'bz-app-plugins';
 **初始化**
 
 ```js
-const Plugins = new AppPlugins;
-
-// 初始化rem，若外部已有可以省略，但需要pageSize/40的比例，默认750/40
-Plugins.initRem();
-
-// 初始化插件
-Plugins.init({
-  // 必填，内部无Vue，需传入
-  vue: Vue,
-  // 外部传入样式表，配置后不会引入内部样式表，同时style参数无效
-  cssLink: '//source.bozhong.com/m/css/m_bbs_public.css',
-  // 内部样式表，暂含tracker/trackerrem/crazy三种模式，默认trackerrem
-  style: 'crazy',
-  // source域名，用于拼接内部样式表路径，默认指向各环境source
-  domain: '//scdn.bozhong.com/source',
-  // 需安装的插件，暂含alert/confirm/toast/loading，默认全部
+new AppPlugins({ 
+  // 需要安装的插件。默认全部，选填。
   plugins: [
     'alert',
     'confirm',
     'toast',
     'loading',
   ],
+  // 若不引入内置的样式表，可外部传入，选填。
+  cssLink: 'xxx.css',
+  base: {
+    // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px，选填。
+    fontSize: '10px', 
+  },
 });
 ```
 
