@@ -3,48 +3,67 @@
 
 ## Example
 
-**npm安装**
+**引入所有插件/requirejs引入**
 
 ```shell
-npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
-```
 
-**引用**
+  // npm引入
+  npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
 
-```js
-// requirejs
-
-<link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
-      
-
-require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
+  import AppPlugins from 'bz-app-plugins'; // 引入所有插件
+  import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
   ...
-}
 
-// 模块内引用
-import AppPlugins from 'bz-app-plugins'; // 按需引入脚本文件，最底部有脚本列表
-import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
+  // requirejs引入
+  <link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
+
+  require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
+    ...
+  }
+
+  // 初始化插件
+  new AppPlugins({ 
+    // 外部传入Vue
+    Vue: Vue,
+    // 需要安装的插件。默认全部，选填。
+    plugins: [
+      'alert',
+      'confirm',
+      'toast',
+      'loading',
+    ],
+    // 若不引入内置的样式表，可外部传入，选填。
+    cssLink: 'xxx.css',
+    base: {
+      // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px，选填。
+      fontSize: '10px', 
+    },
+  });
+
 ```
 
-**初始化**
+**引入单个插件**
 
-```js
-new AppPlugins({ 
-  // 需要安装的插件。默认全部，选填。
-  plugins: [
-    'alert',
-    'confirm',
-    'toast',
-    'loading',
-  ],
-  // 若不引入内置的样式表，可外部传入，选填。
-  cssLink: 'xxx.css',
-  base: {
+```shell
+
+  // npm安装
+  npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
+
+
+  import Toast from 'bz-app-plugins/lib/toast'; // 按需引入脚本文件，最底部有脚本列表
+  import 'bz-app-plugins/css/crazy.toast.css'; // 按需引入样式，最底部有样式列表
+
+  // 初始化插件
+  Vue.use(Toast, { 
     // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px，选填。
-    fontSize: '10px', 
-  },
-});
+    fontSize: '10px'
+  });
+
 ```
+
+**引入单个组件/样式**
+
+  按平时使用习惯引入
 
 **插件使用**
 
@@ -140,29 +159,10 @@ this.$app.confirm({
 this.$app.confirmHide();
 ```
 
-## 开发版本日志
-
-|#|版本号|版本内容|
-|---|---|---|
-|#|1.0.0| vue插件-toast/loading/alert/confirm
-|#|2.0.0| rem初始化代码由外部控制传参执行
-|#|3.0.0| 新增外部选择性安装插件/样式风格选择/去掉require引用时的default层/npm安装
-|#|3.0.1| 修正ExtractTextPlugin配置错误
-|#|3.0.2| 低版本安卓机es6兼容问题，降低webpack-dev-server版本
-|#|3.0.2| toast可不自动隐藏，弹窗类传空字符串不显示相应的标题/文本
-|#|4.0.0| 更新webpack配置，去除rem相关内容，内部样式尺寸单位改em，模块/样式/组件拆分外部可按需引入。
-
-## 打包
+## 模块列表，按需引入
 
 ```shell
-npm run build  // 只打包到 模块内
-npm run build:moe // 打包到source/moe 以及 模块内 
-```
-
-# 按需引入
-
-```shell
-<!-- 模块列表 -->
+<!-- 插件列表 -->
 
 // 引入所有插件，无样式
 bz-app-plugins
@@ -195,4 +195,23 @@ bz-app-plugins/lib/components/loading.js
 bz-app-plugins/lib/components/toast.js
 bz-app-plugins/lib/components/animation/loading.js // loading菊花图
 
+```
+
+## 开发版本日志
+
+|#|版本号|版本内容|
+|---|---|---|
+|#|1.0.0| vue插件-toast/loading/alert/confirm
+|#|2.0.0| rem初始化代码由外部控制传参执行
+|#|3.0.0| 新增外部选择性安装插件/样式风格选择/去掉require引用时的default层/npm安装
+|#|3.0.1| 修正ExtractTextPlugin配置错误
+|#|3.0.2| 低版本安卓机es6兼容问题，降低webpack-dev-server版本
+|#|3.0.2| toast可不自动隐藏，弹窗类传空字符串不显示相应的标题/文本
+|#|4.0.0| 更新webpack配置，去除rem相关内容，内部样式尺寸单位改em，模块/样式/组件拆分外部可按需引入。
+
+## 打包
+
+```shell
+npm run build  // 只打包到 模块内
+npm run build:moe // 打包到source/moe 以及 模块内 
 ```

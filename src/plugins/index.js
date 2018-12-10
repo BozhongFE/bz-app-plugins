@@ -2,7 +2,6 @@ import Alert from './alert/index';
 import Confirm from './confirm/index';
 import Toast from './toast/index';
 import Loading from './loading/index';
-import Vue from 'vue';
 
 const PluginsList = {
   Alert,
@@ -21,6 +20,7 @@ class AppPlugins {
       const val = pluginsConf[i];
       if (val) {
         const key = `${val[0].toUpperCase()}${val.slice(1)}`;
+        const Vue = options.Vue;
         if (PluginsList[key]) Vue.use(PluginsList[key], options.base);
       }
     }  

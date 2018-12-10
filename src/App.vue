@@ -6,37 +6,61 @@
     </div>
     <pre class="code-box">
       <code>
-      // npm安装
-      npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
+        一、引入所有插件/requirejs引入
+        
+        // npm引入
+        npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
 
-      import AppPlugins from 'bz-app-plugins'; // 按需引入脚本文件，最底部有脚本列表
-      import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
-      ...
-
-      // requirejs引入
-      <link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
-      
-      require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
+        import AppPlugins from 'bz-app-plugins'; // 引入所有插件
+        import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
         ...
-      }
 
-      // 具体使用
-      new AppPlugins({ 
-        // 需要安装的插件。默认全部，选填。
-        plugins: [
-          'alert',
-          'confirm',
-          'toast',
-          'loading',
-        ],
-        // 若不引入内置的样式表，可外部传入，选填。
-        cssLink: 'xxx.css',
-        base: {
+        // requirejs引入
+        <<!---->link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
+        
+        require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
+          ...
+        }
+
+        // 初始化插件
+        new AppPlugins({ 
+          // 外部传入Vue
+          Vue: Vue,
+          // 需要安装的插件。默认全部，选填。
+          plugins: [
+            'alert',
+            'confirm',
+            'toast',
+            'loading',
+          ],
+          // 若不引入内置的样式表，可外部传入，选填。
+          cssLink: 'xxx.css',
+          base: {
+            // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px，选填。
+            fontSize: '10px', 
+          },
+        });
+
+
+        二、引入单个插件 
+
+        // npm安装
+        npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
+
+
+        import Toast from 'bz-app-plugins/lib/toast'; // 按需引入脚本文件，最底部有脚本列表
+        import 'bz-app-plugins/css/crazy.toast.css'; // 按需引入样式，最底部有样式列表
+
+        // 初始化插件
+        Vue.use(Toast, { 
           // 样式计算单位，内部设计稿为375px, 尺寸计算单位为10px，请传入相对于页面的10px，选填。
-          fontSize: '10px', 
-        },
-      });
+          fontSize: '10px'
+        });
+        
 
+        三、引入单个组件/样式
+
+        // 按平时使用习惯引入
       </code>
     </pre>
     <pre class="code-box">
@@ -206,7 +230,8 @@
     </div>
     <pre class="code-box">
       <code>
-      <!-- 模块列表, 按需引入 -->
+      一、模块列表, 按需引入
+
       // 引入所有插件，无样式
       bz-app-plugins
 
@@ -216,7 +241,9 @@
       bz-app-plugins/lib/loading.js
       bz-app-plugins/lib/toast.js
 
-      <!-- 样式列表，按需引入 -->
+
+      二、样式列表，按需引入
+
       // 所有模块的样式, 按主题区分，只需引入其中一个
       bz-app-plugins/css/crazy.css
       bz-app-plugins/css/tracker.css
@@ -230,7 +257,9 @@
       bz-app-plugins/css/tracker.loading.css
       bz-app-plugins/css/tracker.toast.css
 
-      <!-- 组件列表，若只需要组件时引入, 除animation，其他不含样式 -->
+
+      三、组件列表，若只需要组件时引入, 除animation，其他不含样式
+
       bz-app-plugins/lib/components/alert.js
       bz-app-plugins/lib/components/confirm.js
       bz-app-plugins/lib/components/dialog.js
