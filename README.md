@@ -22,7 +22,8 @@ require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
 }
 
 // 模块内引用
-import AppPlugins from 'bz-app-plugins';
+import AppPlugins from 'bz-app-plugins'; // 按需引入脚本文件，最底部有脚本列表
+import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
 ```
 
 **初始化**
@@ -149,13 +150,49 @@ this.$app.confirmHide();
 |#|3.0.1| 修正ExtractTextPlugin配置错误
 |#|3.0.2| 低版本安卓机es6兼容问题，降低webpack-dev-server版本
 |#|3.0.2| toast可不自动隐藏，弹窗类传空字符串不显示相应的标题/文本
+|#|4.0.0| 更新webpack配置，去除rem相关内容，内部样式尺寸单位改em，模块/样式/组件拆分外部可按需引入。
+
 ## 打包
 
 ```shell
-npm run build  // 打包到模块内
-npm run build:moe // 打包到source/moe
+npm run build  // 只打包到 模块内
+npm run build:moe // 打包到source/moe 以及 模块内 
 ```
 
-## 后期补充
+# 按需引入
 
-- 组件形式导出
+```shell
+<!-- 模块列表 -->
+
+// 引入所有插件，无样式
+bz-app-plugins
+
+// 直接引入单个插件，无样式
+bz-app-plugins/lib/alert.js
+bz-app-plugins/lib/confirm.js
+bz-app-plugins/lib/loading.js
+bz-app-plugins/lib/toast.js
+
+<!-- 样式列表 -->
+// 所有模块的样式, 按主题区分，只需引入其中一个
+bz-app-plugins/css/crazy.css
+bz-app-plugins/css/tracker.css
+
+// 单个插件的样式，按主题及插件区分，按需引入
+// alert和confirm引入.dialog.css
+bz-app-plugins/css/crazy.dialog.css
+bz-app-plugins/css/crazy.loading.css
+bz-app-plugins/css/crazy.toast.css
+bz-app-plugins/css/tracker.dialog.css
+bz-app-plugins/css/tracker.loading.css
+bz-app-plugins/css/tracker.toast.css
+
+<!-- 组件列表，若只需要组件时引入, 除animation/，其他不含样式 -->
+bz-app-plugins/lib/components/alert.js
+bz-app-plugins/lib/components/confirm.js
+bz-app-plugins/lib/components/dialog.js
+bz-app-plugins/lib/components/loading.js
+bz-app-plugins/lib/components/toast.js
+bz-app-plugins/lib/components/animation/loading.js // loading菊花图
+
+```
