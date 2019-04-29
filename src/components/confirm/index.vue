@@ -7,6 +7,8 @@
     :needCloseBtn="needCloseBtn"
     @on-hide="onHide"
     @on-show="onShow">
+      <div class="app-dialog__cover" :style="`background-image: url(${cover})`" 
+        v-if="cover"></div>
       <div class="app-dialog__hd">
         <!-- <slot name="icon"> -->
           <!-- <app-icon :icon="icon" v-if="icon"></app-icon> -->
@@ -63,6 +65,10 @@
       content: {
         type: String,
         default: null,
+      },
+      cover: {
+        type: String,
+        default: '',
       },
       btnTextSubmit: {
         type: String,

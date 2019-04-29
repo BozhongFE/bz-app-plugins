@@ -3,22 +3,23 @@
     <div class="radio-box">
       <a href="?style=tracker" class="radio-box__a" target="_blank">tracker</a>
       <a href="?style=crazy" class="radio-box__a" target="_blank">crazy</a>
+      <a href="?style=ivf" class="radio-box__a" target="_blank">ivf</a>
     </div>
     <pre class="code-box">
       <code>
         一、引入所有插件/requirejs引入
         
         // npm引入
-        npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
+        npm install https://github.com/BozhongFE/bz-app-plugins#v4.1.0
 
         import AppPlugins from 'bz-app-plugins'; // 引入所有插件
         import 'bz-app-plugins/css/crazy.css'; // 按需引入样式，最底部有样式列表
         ...
 
         // requirejs引入
-        <<!---->link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.0.0/crazy.css">
+        <<!---->link rel="stylesheet" href="https://source.office.bzdev.net/moe/bz-app-plugins/4.1.0/crazy.css">
         
-        require(['mod/bz-app-plugins/4.0.0/bz-app-plugins'], function (AppPlugins) {
+        require(['mod/bz-app-plugins/4.1.0/bz-app-plugins'], function (AppPlugins) {
           ...
         }
 
@@ -45,7 +46,7 @@
         二、引入单个插件 
 
         // npm安装
-        npm install https://github.com/BozhongFE/bz-app-plugins#v4.0.0
+        npm install https://github.com/BozhongFE/bz-app-plugins#v4.1.0
 
 
         import Toast from 'bz-app-plugins/lib/toast'; // 按需引入脚本文件，最底部有脚本列表
@@ -148,6 +149,7 @@
         content: 'content', // 文本
         btnText: 'btnText', // 按钮文案
         close: true, // 点击确认时是否隐藏弹窗, 默认true
+        cover: 'http://www.ruanyifeng.com/blogimg/asset/2016/bg2016012501.png', // 弹窗顶部图
         maskAbled: true, // 点击遮罩是否可隐藏, 默认true
         needCloseBtn: true, // 是否显示关闭按钮, 默认true
         onShow: function() {
@@ -197,6 +199,7 @@
         content: 'content',
         btnTextCancle: 'btnTextCancle',
         btnTextSubmit: 'btnTextSubmit',
+        cover: '', // 弹窗顶部图
         close: false, // 点击确认时是否隐藏弹窗, 默认true
         maskAbled: true, // 点击遮罩是否可隐藏, 默认false
         needCloseBtn: true, // 是否显示关闭按钮, 默认false
@@ -247,6 +250,7 @@
       // 所有模块的样式, 按主题区分，只需引入其中一个
       bz-app-plugins/css/crazy.css
       bz-app-plugins/css/tracker.css
+      bz-app-plugins/css/ivf.css
       
       // 单个插件的样式，按主题及插件区分，按需引入
       // alert和confirm引入.dialog.css
@@ -256,6 +260,9 @@
       bz-app-plugins/css/tracker.dialog.css
       bz-app-plugins/css/tracker.loading.css
       bz-app-plugins/css/tracker.toast.css
+      bz-app-plugins/css/ivf.dialog.css
+      bz-app-plugins/css/ivf.loading.css
+      bz-app-plugins/css/ivf.toast.css
 
 
       三、组件列表，若只需要组件时引入, 除animation，其他不含样式

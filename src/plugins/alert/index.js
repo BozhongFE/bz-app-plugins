@@ -19,6 +19,7 @@ export default AlertPlugin.install = (Vue, { fontSize = '10px' } = {}) => {
   const baseConf = {
     content: '',
     title: '提示',
+    cover: '',
     close: true,
     maskAbled: true,
     needCloseBtn: true,

@@ -7,6 +7,8 @@
     :fontSize="fontSize"
     @on-hide="onHide"
     @on-show="onShow">
+      <div class="app-dialog__cover" :style="`background-image: url(${cover})`" 
+        v-if="cover"></div>
       <div class="app-dialog__hd">
         <slot name="title">
           <div class="app-dialog__title" v-html="title" v-if="title"></div>
@@ -53,6 +55,10 @@
       content: {
         type: String,
         default: null,
+      },
+      cover: {
+        type: String,
+        default: '',
       },
       btnText: {
         type: String,

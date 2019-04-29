@@ -22,83 +22,83 @@
 }
 .app-dialog__box {
   position: relative;
-  width: 28em;
+  width: 27em;
   background-color: #fff;
-  border-radius: 1.4em;
+  border-radius: 1.2em;
   font-size: inherit;
   text-align: center;
 }
 .app-dialog__cover {
   width: 100%;
   height: 11.2em;
-  border-top-left-radius: 1.4em;
-  border-top-right-radius: 1.4em;
+  border-top-left-radius: 1.2em;
+  border-top-right-radius: 1.2em;
   background-size: 100% 100%;
 }
 .app-dialog__cover + .app-dialog__hd {
   padding: 1.5em;
 }
 .app-dialog__hd {
-  padding: 1.5em;
-  margin-bottom: -0.5em;
-  line-height: 2.9em;
+  padding: 2em;
+  margin-bottom: -1.3em;
+  line-height: 2.1em;
   font-size: inherit;
-  color: #444444;
+  color: #000;
 }
 .app-dialog__title {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 .app-dialog__bd {
-  padding: 1.5em 2.5em;
+  padding: 1.5em 2em;
   font-size: inherit;
-  line-height: 2.4em;
-  color: #878c8e;
+  line-height: 1.8em;
+  color: #333;
 }
 .app-dialog__bd:first-child {
-  padding-top: 1.5em;
+  padding-top: 2em;
 }
 .app-dialog__hd + .app-dialog__bd {
   padding-top: 0;
 }
 .app-dialog__content {
-  font-size: 1.6em;
+  font-size: 1.5em;
 }
 .app-dialog__ft {
   display: flex;
-  border-radius: 0 0 1.4em 1.4em;
+  border-radius: 0 0 1.2em 1.2em;
   font-size: inherit;
   overflow: hidden;
 }
 .app-dialog__btn {
   flex: 1;
-  height: 4.8em;
-  line-height: 4.8em;
-  border-top: 1px solid #dcdcdc;
+  height: 4.9em;
+  line-height: 4.9em;
+  border-top: 1px solid #ddd;
   font-size: inherit;
 }
 .app-dialog__btn:active {
-  background-color: #dcdcdc;
+  background-color: #ddd;
 }
 .app-dialog__btn + .app-dialog__btn {
-  border-left: 1px solid #dcdcdc;
+  border-left: 1px solid #ddd;
 }
 .app-dialog__btn-text {
-  font-size: 1.6em;
+  font-size: 1.8em;
 }
 .app-dialog__btn--primary {
   font-weight: normal;
-  color: #ffba2c;
+  color: #5E7EFF;
 }
 .app-dialog__btn--default {
-  color: #878c8e;
+  color: #000;
 }
 .app-dialog__close {
   position: absolute;
-  top: -3.1em;
+  top: -4em;
   right: 0;
-  width: 1.8em;
-  height: 1.8em;
-  padding: 0;
+  width: 2em;
+  height: 2em;
+  padding: 1em;
   font-size: inherit;
   cursor: pointer;
 }
@@ -106,12 +106,12 @@
 .app-dialog__close:after {
   content: '';
   position: absolute;
-  left: 0;
+  left: 1em;
   top: 50%;
   transform-origin: center center;
-  width: 1.8em;
-  height: 0.225em;
-  border-radius: 0.117em;
+  width: 2em;
+  height: 0.25em;
+  border-radius: 0.13em;
   background-color: #fff;
 }
 .app-dialog__close:before {

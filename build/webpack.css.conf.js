@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     tracker: 'css/tracker.less',
     crazy: 'css/crazy.less',
+    ivf: 'css/ivf.less',
   },
   output: {
     path: path.resolve(__dirname, '../css'),

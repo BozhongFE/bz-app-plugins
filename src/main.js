@@ -7,10 +7,12 @@ import AppPlugins from '../dist/bz-app-plugins.umd.js';
 const url = window.location.href;
 const matched = url.match(/[\?|&]style=([^&]*)(&|$)/) || [];
 
-const classType = matched[1] === 'tracker' ? 'tracker' : 'crazy';
+const classType = matched[1] || 'crazy';
 import(`../css/${classType}.css`);
+// import(`./assets/css/${classType}.css`);
 
 new AppPlugins({ 
+  Vue,
   // 需要安装的插件。默认全部，选填。
   plugins: [
     'alert',

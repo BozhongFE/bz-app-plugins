@@ -29,8 +29,18 @@
   font-size: inherit;
   text-align: center;
 }
-.app-dialog__hd {
+.app-dialog__cover {
+  width: 100%;
+  height: @dialogHeightCover;
+  border-top-left-radius: @dialogBorderRadius;
+  border-top-right-radius: @dialogBorderRadius;
+  background-size: 100% 100%; 
+}
+.app-dialog__cover + .app-dialog__hd {
   padding: @dialogSpacingBdPadding;
+}
+.app-dialog__hd {
+  padding: @dialogSpacinghdPadding;
   margin-bottom: @dialogSpacinghdMarginBottom;
   line-height: @dialogFontLineHeightTitle;
   font-size: inherit;
@@ -44,6 +54,9 @@
   font-size: inherit;
   line-height: @dialogFontLineHeightText;
   color: @dialogColorText;
+  &:first-child {
+    padding-top: @dialogSpacinghdPadding;
+  }
 }
 .app-dialog__hd + .app-dialog__bd {
   padding-top: 0;
@@ -86,12 +99,13 @@
   right: @dialogPositionCloseRight;
   width: @dialogWidthClose;
   height: @dialogHeightClose;
+  padding: @dialogClosePadding;
   font-size: inherit;
   cursor: pointer;
   &:before, &:after {
     content: '';
     position: absolute;
-    left: 0;
+    left: @dialogClosePadding;
     top: 50%;
     transform-origin: center center;
     width: @dialogWidthClose;

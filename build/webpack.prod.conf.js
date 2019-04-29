@@ -49,6 +49,9 @@ module.exports = [
       'crazy.dialog': 'css/crazy.dialog.less',
       'crazy.toast': 'css/crazy.toast.less',
       'crazy.loading': 'css/crazy.loading.less',
+      'ivf.dialog': 'css/ivf.dialog.less',
+      'ivf.toast': 'css/ivf.toast.less',
+      'ivf.loading': 'css/ivf.loading.less',
     }
   }),
 ];
