@@ -215,6 +215,7 @@ bz-app-plugins/lib/components/animation/loading.js // loading菊花图
 |#|3.0.2| toast可不自动隐藏，弹窗类传空字符串不显示相应的标题/文本
 |#|4.0.0| 更新webpack配置，去除rem相关内容，内部样式尺寸单位改em，模块/样式/组件拆分外部可按需引入。
 |#|4.1.0| 新增ivf样式，alert/confirm新增弹窗顶图传入
+|#|next| alert/confirm 修正 title 取值错误问题
 
 ## 打包
 

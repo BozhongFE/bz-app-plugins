@@ -37,7 +37,7 @@ export default AlertPlugin.install = (Vue, { fontSize = '10px' } = {}) => {
     const length = args.length;
     const userConf = {};
     for (let i = 0; i < length; i += 1) {
-      const arg = args[0];
+      const arg = args[i];
       if (typeof arg === 'string') {
         if (i === 0) {
           userConf.content = arg;
