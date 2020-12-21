@@ -52,6 +52,9 @@ module.exports = [
       'ivf.dialog': 'css/ivf.dialog.less',
       'ivf.toast': 'css/ivf.toast.less',
       'ivf.loading': 'css/ivf.loading.less',
+      'mindfulness.dialog': 'css/mindfulness.dialog.less',
+      'mindfulness.toast': 'css/mindfulness.toast.less',
+      'mindfulness.loading': 'css/mindfulness.loading.less',
     }
   }),
 ];

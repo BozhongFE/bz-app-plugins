@@ -7,6 +7,7 @@ module.exports = {
     tracker: 'css/tracker.less',
     crazy: 'css/crazy.less',
     ivf: 'css/ivf.less',
+    mindfulness: 'css/mindfulness.less',
   },
   output: {
     path: path.resolve(__dirname, '../css'),

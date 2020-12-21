@@ -4,6 +4,7 @@
       <a href="?style=tracker" class="radio-box__a" target="_blank">tracker</a>
       <a href="?style=crazy" class="radio-box__a" target="_blank">crazy</a>
       <a href="?style=ivf" class="radio-box__a" target="_blank">ivf</a>
+      <a href="?style=mindfulness" class="radio-box__a" target="_blank">mindfulness</a>
     </div>
     <pre class="code-box">
       <code>
@@ -263,6 +264,9 @@
       bz-app-plugins/css/ivf.dialog.css
       bz-app-plugins/css/ivf.loading.css
       bz-app-plugins/css/ivf.toast.css
+      bz-app-plugins/css/mindfulness.dialog.css
+      bz-app-plugins/css/mindfulness.loading.css
+      bz-app-plugins/css/mindfulness.toast.css
 
 
       三、组件列表，若只需要组件时引入, 除animation，其他不含样式
